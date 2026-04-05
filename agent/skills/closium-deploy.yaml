@@ -1,0 +1,91 @@
+name: closium-deploy
+description: |
+  Déploie automatiquement un client Closium OS complet.
+  Crée le dossier Google Drive, duplique le portail Notion,
+  importe les scénarios Make, envoie l'email d'accès client
+  et notifie Gabriel sur Slack.
+version: "1.0"
+author: Gabriel Lecot
+
+trigger:
+  - type: webhook
+    path: /webhook/onboard
+    method: POST
+    secret_env: WEBHOOK_SECRET
+
+  - type: message
+    patterns:
+      - "déploie client *"
+      - "deploy client *"
+      - "onboard *"
+      - "nouveau client *"
+
+inputs:
+  client_nom:
+    type: string
+    required: true
+    description: Raison sociale du client
+  client_email:
+    type: string
+    required: true
+    description: Email du client
+  client_slug:
+    type: string
+    required: false
+    description: Slug URL-safe (généré auto si absent)
+  make_api_key:
+    type: string
+    required: false
+    description: Clé API Make du client (optionnel si Gabriel déploie dans son propre compte)
+  tally_form_id:
+    type: string
+    required: false
+    default: "jaWeWJ"
+  source:
+    type: string
+    required: false
+    description: stripe | tally | manual
+    default: manual
+
+steps:
+  - id: parse
+    name: Parse et valide les données client
+    type: script
+    run: node agent/skills/parse-client.js
+    env:
+      CLIENT_NOM: "{{client_nom}}"
+      CLIENT_EMAIL: "{{client_email}}"
+      CLIENT_SLUG: "{{client_slug}}"
+
+  - id: deploy
+    name: Déploiement complet Closium OS
+    type: shell
+    command: |
+      node deploy.js deploy \
+        --config /tmp/closium-{{parse.slug}}.json
+    working_dir: ~/closium-deploy
+    timeout: 300000
+    on_error: notify_slack_error
+
+  - id: notify_success
+    name: Notification Slack Gabriel
+    type: slack
+    channel: "{{env.SLACK_CHANNEL_GABRIEL}}"
+    message: |
+      ✅ *Closium OS déployé — {{parse.nom}}*
+      📧 {{parse.email}}
+      🕐 {{deploy.duration}}s
+      📁 Drive : {{deploy.drive_url}}
+      📋 Notion : {{deploy.notion_url}}
+      ⚙️ Make : {{deploy.make_team_id}} ({{deploy.scenarios_count}} scénarios)
+    on_error: continue
+
+  - id: notify_slack_error
+    name: Alerte erreur Slack
+    type: slack
+    channel: "{{env.SLACK_CHANNEL_GABRIEL}}"
+    message: |
+      ❌ *Échec déploiement — {{parse.nom}}*
+      Erreur : {{error.message}}
+      Étape : {{error.step}}
+    when: on_error

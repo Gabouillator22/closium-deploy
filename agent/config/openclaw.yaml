@@ -1,0 +1,45 @@
+# OpenClaw Agent — Closium OS
+# Documentation : https://github.com/openclaw/openclaw
+
+agent:
+  name: Closium Agent
+  description: Agent autonome de déploiement Closium OS
+  language: fr
+
+gateway:
+  port: 18789
+  public_tunnel: cloudflare  # cloudflare | ngrok | none
+
+integrations:
+  slack:
+    channel_gabriel: "{{env.SLACK_CHANNEL_GABRIEL}}"
+    notify_on: [deploy_success, deploy_error, webhook_received]
+
+  webhook_server:
+    url: http://localhost:18790
+    routes:
+      - POST /webhook/stripe
+      - POST /webhook/tally
+      - POST /webhook/manual
+
+skills:
+  - path: ./skills/closium-deploy.yaml
+
+# Commandes Slack reconnues par l'agent
+commands:
+  - trigger: "déploie client {nom} {email}"
+    action: POST http://localhost:18790/webhook/manual
+    body:
+      nom: "{nom}"
+      email: "{email}"
+
+  - trigger: "status déploiement"
+    action: GET http://localhost:18790/health
+
+  - trigger: "liste clients"
+    action: shell
+    command: ls ~/closium-deploy/reports/ | tail -10
+
+memory:
+  persist: true
+  store: ./agent/memory.json

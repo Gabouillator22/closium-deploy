@@ -7,6 +7,8 @@
   "bin": { "closium-deploy": "./deploy.js" },
   "scripts": {
     "start": "node deploy.js",
+    "agent": "bash agent/start.sh",
+    "webhook": "node agent/webhook-server.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint": "eslint src/"
   },
