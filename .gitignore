@@ -1,0 +1,9 @@
+node_modules/
+reports/
+credentials/
+.env
+config/client_*.json
+!config/client_example.json
+!config/client_schema.json
+*.log
+.DS_Store

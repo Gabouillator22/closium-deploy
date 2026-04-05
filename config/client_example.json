@@ -1,0 +1,31 @@
+{
+  "client": {
+    "nom": "Agence Exemple",
+    "slug": "agence-exemple",
+    "email": "contact@agence-exemple.fr"
+  },
+  "make": {
+    "api_key": "MAKE_API_KEY_DU_CLIENT",
+    "team_id": null,
+    "zone": "eu2"
+  },
+  "notion": {
+    "token": "NOTION_TOKEN_DU_CLIENT",
+    "master_portal_id": "ID_PORTAIL_TEMPLATE_CLOSIUM",
+    "master_gallerie_id": "ID_GALLERIE_TEMPLATE_CLOSIUM"
+  },
+  "google": {
+    "service_account_path": "./credentials/google_service_account.json",
+    "master_templates_folder_id": "1TdCuRCYud_bzI5sHSd6kle8lYF_T17Tf"
+  },
+  "tally": {
+    "form_id": "jaWeWJ"
+  },
+  "placeholders": {
+    "NOTION_DB_CLIENT_ID": "",
+    "GOOGLE_DRIVE_FOLDER_ID": "",
+    "TALLY_FORM_ID": "jaWeWJ",
+    "SLACK_CHANNEL_ID": "",
+    "WEBHOOK_URL": ""
+  }
+}

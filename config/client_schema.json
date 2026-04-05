@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Closium Client Config",
+  "type": "object",
+  "required": ["client", "make", "notion", "google", "tally", "placeholders"],
+  "properties": {
+    "client": {
+      "type": "object",
+      "required": ["nom", "slug", "email"],
+      "properties": {
+        "nom": { "type": "string" },
+        "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "make": {
+      "type": "object",
+      "required": ["api_key", "zone"],
+      "properties": {
+        "api_key": { "type": "string" },
+        "team_id": { "type": ["integer", "null"] },
+        "zone": { "type": "string", "default": "eu2" }
+      }
+    },
+    "notion": {
+      "type": "object",
+      "required": ["token", "master_portal_id", "master_gallerie_id"],
+      "properties": {
+        "token": { "type": "string" },
+        "master_portal_id": { "type": "string" },
+        "master_gallerie_id": { "type": "string" }
+      }
+    },
+    "google": {
+      "type": "object",
+      "required": ["service_account_path", "master_templates_folder_id"],
+      "properties": {
+        "service_account_path": { "type": "string" },
+        "master_templates_folder_id": { "type": "string" }
+      }
+    },
+    "tally": {
+      "type": "object",
+      "required": ["form_id"],
+      "properties": {
+        "form_id": { "type": "string" }
+      }
+    },
+    "placeholders": {
+      "type": "object",
+      "properties": {
+        "NOTION_DB_CLIENT_ID": { "type": "string" },
+        "GOOGLE_DRIVE_FOLDER_ID": { "type": "string" },
+        "TALLY_FORM_ID": { "type": "string" },
+        "SLACK_CHANNEL_ID": { "type": "string" },
+        "WEBHOOK_URL": { "type": "string" }
+      }
+    }
+  }
+}
