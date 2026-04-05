@@ -23,9 +23,22 @@
   },
   "placeholders": {
     "NOTION_DB_CLIENT_ID": "",
+    "NOTION_DB_SEARCH_ID": "",
     "GOOGLE_DRIVE_FOLDER_ID": "",
+    "GOOGLE_TEMPLATE_DOC_ID": "",
     "TALLY_FORM_ID": "jaWeWJ",
     "SLACK_CHANNEL_ID": "",
-    "WEBHOOK_URL": ""
+    "WEBHOOK_URL": "",
+    "DOCUSIGN_ACCOUNT_ID": "",
+    "CLAUDE_SKILL_ID": "",
+    "CONNECTION_GOOGLE": "",
+    "CONNECTION_NOTION": "",
+    "CONNECTION_DOCUSIGN": "",
+    "CONNECTION_GMAIL": "",
+    "CONNECTION_SLACK": "",
+    "CONNECTION_ANTHROPIC": "",
+    "HOOK_TALLY_A1": "",
+    "HOOK_DOCUSIGN_A2": "",
+    "HOOK_TALLY_A3": ""
   }
 }

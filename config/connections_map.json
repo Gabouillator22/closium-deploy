@@ -1,0 +1,88 @@
+{
+  "_comment": "Mapping des placeholders de connexions Make → à remplir avec les IDs Make du compte client",
+  "_doc": "Chaque client doit créer ses propres connexions OAuth dans Make, puis fournir les IDs ici.",
+
+  "CONNECTION_GOOGLE": {
+    "description": "Connexion Google (Drive + Docs + Gmail)",
+    "type": "account:google",
+    "how_to_get": "Make → Connections → + Add connection → Google → OAuth → copier l'ID"
+  },
+  "CONNECTION_NOTION": {
+    "description": "Connexion Notion",
+    "type": "account:notion",
+    "how_to_get": "Make → Connections → + Add connection → Notion → OAuth"
+  },
+  "CONNECTION_DOCUSIGN": {
+    "description": "Connexion DocuSign",
+    "type": "account:docusign",
+    "how_to_get": "Make → Connections → + Add connection → DocuSign → OAuth"
+  },
+  "CONNECTION_GMAIL": {
+    "description": "Connexion Gmail (envoi d'emails)",
+    "type": "account:google-email",
+    "how_to_get": "Make → Connections → + Add connection → Gmail → OAuth"
+  },
+  "CONNECTION_SLACK": {
+    "description": "Connexion Slack",
+    "type": "account:slack2",
+    "how_to_get": "Make → Connections → + Add connection → Slack → OAuth"
+  },
+  "CONNECTION_ANTHROPIC": {
+    "description": "Connexion Anthropic Claude (API key)",
+    "type": "account:anthropic-claude",
+    "how_to_get": "Make → Connections → + Add connection → Anthropic Claude → API Key"
+  },
+
+  "_hooks_comment": "Webhooks créés automatiquement à l'import du scénario. Laisser vide.",
+  "HOOK_TALLY_A1": {
+    "description": "Webhook Tally pour A1 (IBAN + DocuSign)",
+    "type": "hook:tally",
+    "note": "Créé automatiquement à l'activation du scénario"
+  },
+  "HOOK_TALLY_A1_STRIPE_DOCU": {
+    "description": "Webhook Tally pour A1 (Stripe + DocuSign)",
+    "type": "hook:tally"
+  },
+  "HOOK_TALLY_A1_STRIPE_NS": {
+    "description": "Webhook Tally pour A1 (Stripe + No Signature)",
+    "type": "hook:tally"
+  },
+  "HOOK_DOCUSIGN_A2": {
+    "description": "Webhook DocuSign Connect pour A2",
+    "type": "hook:docusign35"
+  },
+  "HOOK_TALLY_A3": {
+    "description": "Webhook Tally pour A3 (Template Contrat)",
+    "type": "hook:tally"
+  },
+
+  "_ids_comment": "IDs à remplir par client",
+  "GOOGLE_DRIVE_FOLDER_ID": {
+    "description": "ID du dossier Google Drive racine (templates contrats)",
+    "example": "1ZnXm0dC9qjy3okN-zS8Rq6aWh6seW3d8",
+    "how_to_get": "Drive → dossier → URL → /folders/[ID]"
+  },
+  "GOOGLE_TEMPLATE_DOC_ID": {
+    "description": "ID du Google Doc template maître (A1)",
+    "example": "1CsIs7N8gKrwD2JsrKV3_Q58S3lLas-1EgmHb9_bMdmM",
+    "how_to_get": "Google Docs → URL → /d/[ID]/edit"
+  },
+  "NOTION_DB_CLIENT_ID": {
+    "description": "ID de la database Notion pour createAPage (fiches clients)",
+    "example": "2d145ca2-a462-81dd-8d33-c978c9f78932"
+  },
+  "NOTION_DB_SEARCH_ID": {
+    "description": "ID de la database Notion pour searchObjects1 (A2 — lookup email)",
+    "example": "2d145ca2-a462-813d-aa4c-000b69b5bc73"
+  },
+  "DOCUSIGN_ACCOUNT_ID": {
+    "description": "ID du compte DocuSign (accountId EU)",
+    "example": "fbee2b98-a0d9-4fa6-8b7d-f88b50ad5c96",
+    "how_to_get": "DocuSign Admin → Apps and Keys → API Account ID"
+  },
+  "CLAUDE_SKILL_ID": {
+    "description": "ID du Claude Skill 'legal-contracts-fr' (A3)",
+    "example": "skill_01Nu24K1dHf52HTShXigzEBm",
+    "how_to_get": "Anthropic Console → Skills → copier l'ID"
+  }
+}

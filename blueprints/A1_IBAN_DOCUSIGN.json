@@ -1,0 +1,2991 @@
+{
+  "flow": [
+    {
+      "id": 1,
+      "mapper": {},
+      "module": "tally:watchNewResponse",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTHOOK__": {
+              "data": {
+                "editable": "false"
+              },
+              "label": "My New Response webhook"
+            }
+          }
+        },
+        "designer": {
+          "x": 274,
+          "y": -3
+        },
+        "interface": [
+          {
+            "name": "eventId",
+            "type": "text",
+            "label": "Event ID"
+          },
+          {
+            "name": "responseId",
+            "type": "text",
+            "label": "Response ID"
+          },
+          {
+            "name": "submissionId",
+            "type": "text",
+            "label": "Submission ID"
+          },
+          {
+            "name": "respondentId",
+            "type": "text",
+            "label": "Respondent ID"
+          },
+          {
+            "name": "formId",
+            "type": "text",
+            "label": "Form ID"
+          },
+          {
+            "name": "formName",
+            "type": "text",
+            "label": "Form Name"
+          },
+          {
+            "name": "createdAt",
+            "type": "date",
+            "label": "Created at"
+          },
+          {
+            "name": "fields",
+            "spec": [
+              {
+                "name": "Je suis :",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array"
+              },
+              {
+                "name": "Je suis : (Particulier)",
+                "type": "boolean"
+              },
+              {
+                "name": "Je suis : (Entreprise)",
+                "type": "boolean"
+              },
+              {
+                "name": "Prénom",
+                "type": "text"
+              },
+              {
+                "name": "Nom",
+                "type": "text"
+              },
+              {
+                "name": "Nom De La Société ",
+                "type": "text"
+              },
+              {
+                "name": "Email Professionel",
+                "type": "email"
+              },
+              {
+                "name": "Adresse Du Siège",
+                "type": "text"
+              },
+              {
+                "name": "Numéro SIRET",
+                "type": "text"
+              },
+              {
+                "name": "Numéro TVA",
+                "type": "text"
+              },
+              {
+                "name": "Téléphone",
+                "type": "text"
+              },
+              {
+                "name": "name",
+                "type": "text"
+              },
+              {
+                "name": "company",
+                "type": "text"
+              },
+              {
+                "name": "phone",
+                "type": "text"
+              },
+              {
+                "name": "address",
+                "type": "text"
+              },
+              {
+                "name": "city",
+                "type": "text"
+              },
+              {
+                "name": "zip",
+                "type": "text"
+              },
+              {
+                "name": "email",
+                "type": "text"
+              },
+              {
+                "name": "session_id",
+                "type": "text"
+              }
+            ],
+            "type": "collection",
+            "label": "Fields"
+          },
+          {
+            "name": "fieldsById",
+            "spec": [
+              {
+                "name": "question_VlpWzg",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array",
+                "label": "Je suis :"
+              },
+              {
+                "name": "question_VlpWzg_1ad240af-6224-4562-ba9d-0675a757773a",
+                "type": "boolean",
+                "label": "Je suis : (Particulier)"
+              },
+              {
+                "name": "question_VlpWzg_176d91f6-0ba1-42af-9e12-d7b7317c196a",
+                "type": "boolean",
+                "label": "Je suis : (Entreprise)"
+              },
+              {
+                "name": "question_PERZzV",
+                "type": "text",
+                "label": "Prénom"
+              },
+              {
+                "name": "question_E1qox4",
+                "type": "text",
+                "label": "Nom"
+              },
+              {
+                "name": "question_5kX0VE",
+                "type": "text",
+                "label": "Nom De La Société "
+              },
+              {
+                "name": "question_8kNDrP",
+                "type": "email",
+                "label": "Email Professionel"
+              },
+              {
+                "name": "question_rKD8oN",
+                "type": "text",
+                "label": "Adresse Du Siège"
+              },
+              {
+                "name": "question_0MV0kj",
+                "type": "text",
+                "label": "Numéro SIRET"
+              },
+              {
+                "name": "question_zzEBd0",
+                "type": "text",
+                "label": "Numéro TVA"
+              },
+              {
+                "name": "question_4kalrX",
+                "type": "text",
+                "label": "Téléphone"
+              },
+              {
+                "name": "question_dAbGzK_8c5f3b5c-62b1-4290-8f6b-c8bd9f07e042",
+                "type": "text",
+                "label": "name"
+              },
+              {
+                "name": "question_dAbGzK_2d99870e-3257-4229-9c6d-3ecaa2a662dd",
+                "type": "text",
+                "label": "company"
+              },
+              {
+                "name": "question_dAbGzK_2747e65f-83c2-4d7d-b8ae-03e21d830ac8",
+                "type": "text",
+                "label": "phone"
+              },
+              {
+                "name": "question_dAbGzK_d9f0fa41-ce6e-467b-bc28-8209c207f8b4",
+                "type": "text",
+                "label": "address"
+              },
+              {
+                "name": "question_dAbGzK_ca11cd63-3753-4ad7-ba62-5b0e2ae355c1",
+                "type": "text",
+                "label": "city"
+              },
+              {
+                "name": "question_dAbGzK_69904fe6-121e-47cc-bd96-dbb0f48aa37f",
+                "type": "text",
+                "label": "zip"
+              },
+              {
+                "name": "question_dAbGzK_6d27405e-679e-4a85-a317-3b50ddb816e5",
+                "type": "text",
+                "label": "email"
+              },
+              {
+                "name": "question_dAbGzK_e8e40c33-c65c-4ba0-a959-694d75fb8ded",
+                "type": "text",
+                "label": "session_id"
+              }
+            ],
+            "type": "collection",
+            "label": "Fields by ID"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTHOOK__",
+            "type": "hook:tally",
+            "label": "Webhook",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTHOOK__": "{{HOOK_TALLY_A1}}"
+      }
+    },
+    {
+      "id": 3,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "telephone",
+            "value": "{{1.fieldsById.question_4kalrX}}"
+          },
+          {
+            "name": "email",
+            "value": "{{1.fields.`Email Professionel`}}"
+          },
+          {
+            "name": "nom_societe",
+            "value": "{{1.fieldsById.question_5kX0VE}}"
+          },
+          {
+            "name": "Siret",
+            "value": "{{1.fields.`Numéro SIRET`}}"
+          },
+          {
+            "name": "adresse",
+            "value": "{{1.fields.Adresse}}"
+          },
+          {
+            "name": "code_postal",
+            "value": "{{1.fields.zip}}"
+          },
+          {
+            "name": "ville",
+            "value": "{{1.fieldsById.`question_dAbGzK_ca11cd63-3753-4ad7-ba62-5b0e2ae355c1`}}"
+          },
+          {
+            "name": "tva",
+            "value": "{{1.fields.`Numéro TVA`}}"
+          },
+          {
+            "name": "date_contrat",
+            "value": "{{formatDate(now; \"DD/MM/YYYY\")}}"
+          },
+          {
+            "name": "prenom",
+            "value": "{{1.fields.`Prénom`}}"
+          },
+          {
+            "name": "nom",
+            "value": "{{1.fields.Nom}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "variables",
+            "spec": [
+              {
+                "name": "name",
+                "type": "text",
+                "label": "Variable name",
+                "required": true
+              },
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Variable value"
+              }
+            ],
+            "type": "array",
+            "label": "Variables"
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          }
+        ],
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            },
+            "variables": {
+              "items": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          }
+        },
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "telephone",
+            "type": "any",
+            "label": "telephone"
+          },
+          {
+            "name": "email",
+            "type": "any",
+            "label": "email"
+          },
+          {
+            "name": "nom_societe",
+            "type": "any",
+            "label": "nom_societe"
+          },
+          {
+            "name": "Siret",
+            "type": "any",
+            "label": "Siret"
+          },
+          {
+            "name": "adresse",
+            "type": "any",
+            "label": "adresse"
+          },
+          {
+            "name": "code_postal",
+            "type": "any",
+            "label": "code_postal"
+          },
+          {
+            "name": "ville",
+            "type": "any",
+            "label": "ville"
+          },
+          {
+            "name": "tva",
+            "type": "any",
+            "label": "tva"
+          },
+          {
+            "name": "date_contrat",
+            "type": "any",
+            "label": "date_contrat"
+          },
+          {
+            "name": "prenom",
+            "type": "any",
+            "label": "prenom"
+          },
+          {
+            "name": "nom",
+            "type": "any",
+            "label": "nom"
+          }
+        ]
+      },
+      "parameters": {}
+    },
+    {
+      "id": 76,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "nom_affichage",
+            "value": "{{ifempty(3.nom_societe; ifempty(trim(join(3.prenom; ; 3.nom)); \"Client\"))}}"
+          },
+          {
+            "name": "titre_contrat",
+            "value": "Onboarding Automatisé"
+          },
+          {
+            "name": "file_name",
+            "value": "{{join(\"Contrat Sentinel - \"; trim(ifempty(3.nom_societe; join(3.prenom; ; 3.nom))); \".pdf\")}}"
+          },
+          {
+            "name": "email_sign",
+            "value": "{{3.email}}"
+          },
+          {
+            "name": "prenom_sign",
+            "value": "{{ifempty(3.prenom; 3.nom_societe)}}"
+          },
+          {
+            "name": "nom_sign",
+            "value": "{{ifempty(3.nom; \"\")}}"
+          },
+          {
+            "name": "nom_complet_sign",
+            "value": "{{trim(ifempty(3.nom_societe; ifempty(join(3.prenom; ; 3.nom); \"Client\")))}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "variables",
+            "spec": [
+              {
+                "name": "name",
+                "type": "text",
+                "label": "Variable name",
+                "required": true
+              },
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Variable value"
+              }
+            ],
+            "type": "array",
+            "label": "Variables"
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          }
+        ],
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            },
+            "variables": {
+              "items": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          }
+        },
+        "designer": {
+          "x": 900,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "nom_affichage",
+            "type": "any",
+            "label": "nom_affichage"
+          },
+          {
+            "name": "titre_contrat",
+            "type": "any",
+            "label": "titre_contrat"
+          },
+          {
+            "name": "file_name",
+            "type": "any",
+            "label": "file_name"
+          },
+          {
+            "name": "email_sign",
+            "type": "any",
+            "label": "email_sign"
+          },
+          {
+            "name": "prenom_sign",
+            "type": "any",
+            "label": "prenom_sign"
+          },
+          {
+            "name": "nom_sign",
+            "type": "any",
+            "label": "nom_sign"
+          },
+          {
+            "name": "nom_complet_sign",
+            "type": "any",
+            "label": "nom_complet_sign"
+          }
+        ]
+      },
+      "parameters": {}
+    },
+    {
+      "id": 4,
+      "mapper": {
+        "from": "drive",
+        "name": "{{76.titre_contrat}}",
+        "image": {},
+        "select": "dropdown",
+        "document": "/{{GOOGLE_TEMPLATE_DOC_ID}}",
+        "folderId": "/{{GOOGLE_DRIVE_FOLDER_ID}}",
+        "requests": {
+          "Siret": "{{3.Siret}}",
+          "email": "{{3.email}}",
+          "ville": "{{3.ville}}",
+          "adresse": "{{3.adresse}}",
+          "telephone": "{{3.telephone}}",
+          "nom_client": "{{76.nom_affichage}}",
+          "code_postal": "{{3.code_postal}}",
+          "nom_societe": "{{3.nom_societe}}",
+          "date_contrat": "{{3.date_contrat}}",
+          "date_signature": "{{3.date_contrat}}"
+        },
+        "destination": "drive"
+      },
+      "module": "google-docs:createADocumentFromTemplate",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Create a Document from a Template",
+            "required": true,
+            "validate": {
+              "enum": [
+                "map",
+                "dropdown"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "label": "Title",
+            "required": true
+          },
+          {
+            "name": "destination",
+            "type": "select",
+            "label": "New Drive Location",
+            "required": true,
+            "validate": {
+              "enum": [
+                "drive",
+                "share",
+                "team"
+              ]
+            }
+          },
+          {
+            "name": "from",
+            "type": "select",
+            "label": "Choose a Drive",
+            "required": true,
+            "validate": {
+              "enum": [
+                "drive",
+                "share",
+                "team"
+              ]
+            }
+          },
+          {
+            "name": "document",
+            "type": "file",
+            "label": "Document ID",
+            "required": true
+          },
+          {
+            "name": "requests",
+            "spec": [
+              {
+                "name": "nom_societe",
+                "type": "any"
+              },
+              {
+                "name": "Siret",
+                "type": "any"
+              },
+              {
+                "name": "adresse",
+                "type": "any"
+              },
+              {
+                "name": "code_postal",
+                "type": "any"
+              },
+              {
+                "name": "ville",
+                "type": "any"
+              },
+              {
+                "name": "nom_client",
+                "type": "any"
+              },
+              {
+                "name": "email",
+                "type": "any"
+              },
+              {
+                "name": "telephone",
+                "type": "any"
+              },
+              {
+                "name": "montant",
+                "type": "any"
+              },
+              {
+                "name": "date_signature",
+                "type": "any"
+              },
+              {
+                "name": "date_contrat",
+                "type": "any"
+              }
+            ],
+            "type": "collection",
+            "label": "Values"
+          },
+          {
+            "name": "image",
+            "spec": [
+              {
+                "name": "kix.a1tk86q02w9s-t.0",
+                "type": "url",
+                "label": "Tab (Tab 1) - Body: Image No. 1",
+                "metadata": {
+                  "tabId": "t.0"
+                }
+              }
+            ],
+            "type": "collection",
+            "label": "Image URLs"
+          },
+          {
+            "name": "folderId",
+            "type": "folder",
+            "label": "New Document's Location",
+            "required": true
+          }
+        ],
+        "restore": {
+          "expect": {
+            "from": {
+              "label": "My Drive"
+            },
+            "select": {
+              "label": "By Dropdown"
+            },
+            "document": {
+              "path": [
+                "[TEMPLATE] Contrat Prestation — Sentinel OS"
+              ]
+            },
+            "folderId": {
+              "mode": "chose",
+              "path": [
+                "Automatisation Création De Contrat "
+              ]
+            },
+            "destination": {
+              "label": "My Drive"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              },
+              "label": "My Google connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1200,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GOOGLE}}"
+      }
+    },
+    {
+      "id": 43,
+      "mapper": {
+        "document": "{{4.id}}",
+        "mimeType": "application/pdf",
+        "destination": "drive"
+      },
+      "module": "google-docs:exportADocument",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "expect": {
+            "document": {
+              "mode": "edit",
+              "path": []
+            },
+            "mimeType": {
+              "mode": "chose",
+              "label": "PDF Document (.pdf)"
+            },
+            "destination": {
+              "label": "My Drive"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              },
+              "label": "My Google connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1500,
+          "y": 0,
+          "name": "Convert Doc To PDF"
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GOOGLE}}"
+      }
+    },
+    {
+      "id": 14,
+      "mapper": {
+        "status": false,
+        "documents": [
+          {
+            "name": "{{43.filename}}",
+            "display": "inline",
+            "documentId": "1",
+            "fileExtension": "pdf",
+            "documentBase64": "{{43.data}}"
+          }
+        ],
+        "emailBlurb": "Bonjour {{76.prenom_sign}}, veuillez signer votre contrat de prestation Closium OS via le lien ci-dessous.",
+        "recipients": {
+          "Signers": [
+            {
+              "name": "{{76.nom_affichage}}",
+              "tabs": {},
+              "email": "{{3.email}}",
+              "recipientId": "1",
+              "addAccessCodeToEmail": false
+            }
+          ]
+        },
+        "emailSubject": "{{43.filename}}",
+        "select_account": "{ \"accountId\": \"{{DOCUSIGN_ACCOUNT_ID}}\", \"baseUri\": \"https://eu.docusign.net\" }"
+      },
+      "module": "docusign:CreateEnvelope",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select_account",
+            "type": "select",
+            "label": "Account",
+            "required": true
+          },
+          {
+            "name": "status",
+            "type": "boolean",
+            "label": "Draft",
+            "required": true
+          },
+          {
+            "name": "recipients",
+            "spec": [
+              {
+                "name": "Signers",
+                "spec": [
+                  {
+                    "name": "email",
+                    "type": "email",
+                    "label": "Email",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name",
+                    "required": true,
+                    "validate": {
+                      "max": 100
+                    }
+                  },
+                  {
+                    "name": "recipientId",
+                    "type": "text",
+                    "label": "Recipient ID",
+                    "required": true
+                  },
+                  {
+                    "name": "addAccessCodeToEmail",
+                    "type": "boolean",
+                    "label": "Add Access Code",
+                    "nested": [
+                      {
+                        "name": "accessCode",
+                        "type": "text",
+                        "label": "Access Code"
+                      }
+                    ],
+                    "required": true
+                  },
+                  {
+                    "name": "note",
+                    "type": "text",
+                    "label": "Note",
+                    "validate": {
+                      "max": 1000
+                    }
+                  },
+                  {
+                    "name": "tabs",
+                    "spec": [
+                      {
+                        "name": "textTabs",
+                        "spec": [
+                          {
+                            "name": "tabLabel",
+                            "type": "text",
+                            "label": "Tab Label"
+                          },
+                          {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Value"
+                          }
+                        ],
+                        "type": "array",
+                        "label": "Text Tabs"
+                      },
+                      {
+                        "name": "dateSignedTabs",
+                        "spec": [
+                          {
+                            "name": "anchorString",
+                            "type": "text",
+                            "label": "Anchor String"
+                          },
+                          {
+                            "name": "anchorUnits",
+                            "type": "text",
+                            "label": "Anchor Units"
+                          },
+                          {
+                            "name": "tabLabel",
+                            "type": "text",
+                            "label": "Tab Label"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          }
+                        ],
+                        "type": "array",
+                        "label": "Date Signed Tabs"
+                      },
+                      {
+                        "name": "signHereTabs",
+                        "spec": [
+                          {
+                            "name": "xPosition",
+                            "type": "uinteger",
+                            "label": "X Position",
+                            "required": true
+                          },
+                          {
+                            "name": "yPosition",
+                            "type": "uinteger",
+                            "label": "Y Position",
+                            "required": true
+                          },
+                          {
+                            "name": "documentId",
+                            "type": "text",
+                            "label": "Document ID",
+                            "required": true
+                          },
+                          {
+                            "name": "recipientId",
+                            "type": "text",
+                            "label": "Recipient ID",
+                            "required": true
+                          },
+                          {
+                            "name": "pageNumber",
+                            "type": "uinteger",
+                            "label": "Page Number",
+                            "required": true
+                          }
+                        ],
+                        "type": "array",
+                        "label": "SignHere Tabs"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Tabs"
+                  }
+                ],
+                "type": "array",
+                "required": true
+              }
+            ],
+            "type": "collection",
+            "label": "Recipients"
+          },
+          {
+            "name": "emailSubject",
+            "type": "text",
+            "label": "Subject",
+            "required": true
+          },
+          {
+            "name": "emailBlurb",
+            "type": "text",
+            "label": "Message",
+            "validate": {
+              "max": 10000
+            }
+          },
+          {
+            "name": "documents",
+            "spec": [
+              {
+                "name": "name",
+                "type": "filename",
+                "label": "Document name",
+                "required": true,
+                "semantic": "file:name"
+              },
+              {
+                "name": "documentBase64",
+                "type": "buffer",
+                "label": "Data",
+                "required": true,
+                "semantic": "file:data"
+              },
+              {
+                "name": "documentId",
+                "type": "text",
+                "label": "Document ID",
+                "required": true
+              },
+              {
+                "name": "fileExtension",
+                "type": "select",
+                "label": "File Extension",
+                "options": [
+                  {
+                    "label": "doc",
+                    "value": "doc"
+                  },
+                  {
+                    "label": "docm",
+                    "value": "docm"
+                  },
+                  {
+                    "label": "docx",
+                    "value": "docx"
+                  },
+                  {
+                    "label": "dot",
+                    "value": "dot"
+                  },
+                  {
+                    "label": "dotm",
+                    "value": "dotm"
+                  },
+                  {
+                    "label": "dotx",
+                    "value": "dotx"
+                  },
+                  {
+                    "label": "htm",
+                    "value": "htm"
+                  },
+                  {
+                    "label": "html",
+                    "value": "html"
+                  },
+                  {
+                    "label": "msg",
+                    "value": "msg"
+                  },
+                  {
+                    "label": "pdf",
+                    "value": "pdf"
+                  },
+                  {
+                    "label": "rtf",
+                    "value": "rtf"
+                  },
+                  {
+                    "label": "txt",
+                    "value": "txt"
+                  },
+                  {
+                    "label": "wpd",
+                    "value": "wpd"
+                  },
+                  {
+                    "label": "xhtml",
+                    "value": "xhtml"
+                  },
+                  {
+                    "label": "xps",
+                    "value": "xps"
+                  },
+                  {
+                    "label": "bmp",
+                    "value": "bmp"
+                  },
+                  {
+                    "label": "gif",
+                    "value": "gif"
+                  },
+                  {
+                    "label": "heic",
+                    "value": "heic"
+                  },
+                  {
+                    "label": "jpg",
+                    "value": "jpg"
+                  },
+                  {
+                    "label": "jpeg",
+                    "value": "jpeg"
+                  },
+                  {
+                    "label": "png",
+                    "value": "png"
+                  },
+                  {
+                    "label": "tif",
+                    "value": "tif"
+                  },
+                  {
+                    "label": "tiff",
+                    "value": "tiff"
+                  },
+                  {
+                    "label": "pot",
+                    "value": "pot"
+                  },
+                  {
+                    "label": "potx",
+                    "value": "potx"
+                  },
+                  {
+                    "label": "pps",
+                    "value": "pps"
+                  },
+                  {
+                    "label": "ppt",
+                    "value": "ppt"
+                  },
+                  {
+                    "label": "pptm",
+                    "value": "pptm"
+                  },
+                  {
+                    "label": "pptx",
+                    "value": "pptx"
+                  },
+                  {
+                    "label": "csv",
+                    "value": "csv"
+                  },
+                  {
+                    "label": "xls",
+                    "value": "xls"
+                  },
+                  {
+                    "label": "xlsm",
+                    "value": "xlsm"
+                  },
+                  {
+                    "label": "xlsx",
+                    "value": "xlsx"
+                  }
+                ]
+              },
+              {
+                "name": "display",
+                "type": "select",
+                "label": "Is supplemental document",
+                "options": [
+                  {
+                    "label": "Yes",
+                    "value": "modal"
+                  },
+                  {
+                    "label": "No",
+                    "value": "inline"
+                  }
+                ]
+              }
+            ],
+            "type": "array",
+            "label": "Documents",
+            "required": true
+          },
+          {
+            "name": "externalEnvelopeId",
+            "type": "text",
+            "label": "External Envelope ID"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "status": {
+              "mode": "chose"
+            },
+            "documents": {
+              "mode": "chose",
+              "items": [
+                {
+                  "display": {
+                    "mode": "chose",
+                    "label": "No"
+                  },
+                  "fileExtension": {
+                    "mode": "chose",
+                    "label": "pdf"
+                  }
+                }
+              ]
+            },
+            "recipients": {
+              "nested": {
+                "Signers": {
+                  "mode": "chose",
+                  "items": [
+                    {
+                      "tabs": {
+                        "nested": {
+                          "textTabs": {
+                            "mode": "chose"
+                          },
+                          "signHereTabs": {
+                            "mode": "chose"
+                          },
+                          "dateSignedTabs": {
+                            "mode": "chose"
+                          }
+                        }
+                      },
+                      "addAccessCodeToEmail": {
+                        "mode": "chose"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "select_account": {
+              "label": "Gabriel Lecot"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "docusign"
+              },
+              "label": "My DocuSign connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1800,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:docusign",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_DOCUSIGN}}"
+      }
+    },
+    {
+      "id": 23,
+      "mapper": {
+        "fields": {
+          "hGIT": "{{3.ville}}",
+          "s~ZP": "{{76.email_sign}}",
+          "title": "{{76.nom_affichage}}",
+          "Dy%3CB": "{{3.code_postal}}",
+          "VIO%3E": "{{3.adresse}}",
+          "z%3ERN": "{{76.nom_affichage}}"
+        },
+        "select": "list",
+        "database": "{{NOTION_DB_CLIENT_ID}}"
+      },
+      "module": "notion:createAPage",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Enter a Database ID",
+            "required": true,
+            "validate": {
+              "enum": [
+                "map",
+                "list"
+              ]
+            }
+          },
+          {
+            "name": "database",
+            "type": "text",
+            "label": "Database ID",
+            "required": true
+          },
+          {
+            "name": "fields",
+            "spec": [
+              {
+                "name": "title",
+                "type": "text",
+                "label": "Name",
+                "metadata": {
+                  "type": "title"
+                },
+                "required": true
+              },
+              {
+                "name": "Dy%3CB",
+                "type": "text",
+                "label": "Code Postal",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "VIO%3E",
+                "type": "text",
+                "label": "Adresse",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "hGIT",
+                "type": "text",
+                "label": "Ville",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "s~ZP",
+                "type": "email",
+                "label": "Client Email",
+                "metadata": {
+                  "type": "email"
+                }
+              },
+              {
+                "name": "z%3ERN",
+                "type": "text",
+                "label": "Nom Société",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              }
+            ],
+            "type": "collection",
+            "label": "Fields"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "select": {
+              "label": "Select from the list"
+            },
+            "database": {
+              "nested": [
+                {
+                  "name": "fields",
+                  "spec": [
+                    {
+                      "name": "title",
+                      "type": "text",
+                      "label": "Name",
+                      "metadata": {
+                        "type": "title"
+                      },
+                      "required": true
+                    },
+                    {
+                      "name": "Dy%3CB",
+                      "type": "text",
+                      "label": "Code Postal",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "VIO%3E",
+                      "type": "text",
+                      "label": "Adresse",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "hGIT",
+                      "type": "text",
+                      "label": "Ville",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "s~ZP",
+                      "type": "email",
+                      "label": "Client Email",
+                      "metadata": {
+                        "type": "email"
+                      }
+                    },
+                    {
+                      "name": "z%3ERN",
+                      "type": "text",
+                      "label": "Nom Société",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Fields"
+                }
+              ],
+              "rpcSearch": {
+                "label": "Client Portal Hub",
+                "value": "{{NOTION_DB_CLIENT_ID}}"
+              }
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "notion3"
+              },
+              "label": "lecot.gabriel@gmail.com"
+            }
+          }
+        },
+        "designer": {
+          "x": 2100,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "object",
+            "type": "text",
+            "label": "Object"
+          },
+          {
+            "name": "id",
+            "type": "text",
+            "label": "Database Item ID"
+          },
+          {
+            "name": "created_time",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "last_edited_time",
+            "type": "date",
+            "label": "Last Edited Time"
+          },
+          {
+            "name": "created_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Created by"
+          },
+          {
+            "name": "last_edited_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Last Edited by"
+          },
+          {
+            "name": "icon",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "emoji",
+                "type": "text",
+                "label": "Emoji"
+              }
+            ],
+            "type": "collection",
+            "label": "Icon"
+          },
+          {
+            "name": "cover",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "external",
+                "spec": [
+                  {
+                    "name": "url",
+                    "type": "text",
+                    "label": "URL"
+                  }
+                ],
+                "type": "collection",
+                "label": "External"
+              }
+            ],
+            "type": "collection",
+            "label": "Cover"
+          },
+          {
+            "name": "url",
+            "type": "text",
+            "label": "URL"
+          },
+          {
+            "name": "parent",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "workspace",
+                "type": "boolean",
+                "label": "Workspace"
+              },
+              {
+                "name": "page_id",
+                "type": "text",
+                "label": "Page ID"
+              },
+              {
+                "name": "database_id",
+                "type": "text",
+                "label": "Database ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Parent"
+          },
+          {
+            "name": "archived",
+            "type": "boolean",
+            "label": "Archived"
+          },
+          {
+            "name": "properties",
+            "spec": {
+              "spec": [
+                {
+                  "name": "id",
+                  "type": "text",
+                  "label": "ID"
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "label": "Type"
+                },
+                {
+                  "name": "people",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                      },
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "avatar_url",
+                        "type": "text",
+                        "label": "Avatar Url"
+                      },
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "person",
+                        "spec": [
+                          {
+                            "name": "email",
+                            "type": "text",
+                            "label": "Email"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Person"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "People"
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "label": "URL"
+                },
+                {
+                  "name": "text",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Text"
+                },
+                {
+                  "name": "select",
+                  "spec": [
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "color",
+                      "type": "text",
+                      "label": "Color"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Select"
+                },
+                {
+                  "name": "email",
+                  "type": "text",
+                  "label": "Email"
+                },
+                {
+                  "name": "phone_number",
+                  "type": "text",
+                  "label": "Phone Number"
+                },
+                {
+                  "name": "multi_select",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Multi Select"
+                },
+                {
+                  "name": "date",
+                  "spec": [
+                    {
+                      "name": "start",
+                      "type": "text",
+                      "label": "Start"
+                    },
+                    {
+                      "name": "end",
+                      "type": "text",
+                      "label": "End"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Date"
+                },
+                {
+                  "name": "checkbox",
+                  "type": "boolean",
+                  "label": "Checkbox"
+                },
+                {
+                  "name": "number",
+                  "type": "number",
+                  "label": "Number"
+                },
+                {
+                  "name": "files",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Files"
+                },
+                {
+                  "name": "title",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Title"
+                },
+                {
+                  "name": "last_edited_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Last Edited Time"
+                },
+                {
+                  "name": "created_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Created Time"
+                },
+                {
+                  "name": "last_edited_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Last Edited By"
+                },
+                {
+                  "name": "created_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Created By"
+                },
+                {
+                  "name": "formula",
+                  "spec": [
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "string",
+                      "type": "text",
+                      "label": "String"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Formula"
+                },
+                {
+                  "name": "relation",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Relation"
+                },
+                {
+                  "name": "label",
+                  "type": "text",
+                  "label": "Label"
+                }
+              ],
+              "type": "collection"
+            },
+            "type": "array",
+            "label": "Properties"
+          },
+          {
+            "name": "properties_value",
+            "spec": [
+              {
+                "name": "Code Postal",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Code Postal"
+              },
+              {
+                "name": "Client Invited",
+                "type": "boolean",
+                "label": "Client Invited"
+              },
+              {
+                "name": "Cover Image",
+                "spec": [
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "file",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      },
+                      {
+                        "name": "expiry_time",
+                        "type": "date",
+                        "label": "Expiry Time"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "File"
+                  },
+                  {
+                    "name": "external",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "External"
+                  }
+                ],
+                "type": "array",
+                "label": "Cover Image"
+              },
+              {
+                "name": "date",
+                "type": "date",
+                "label": "date"
+              },
+              {
+                "name": "Adresse",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Adresse"
+              },
+              {
+                "name": "Nom Calculé",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "string",
+                    "type": "text",
+                    "label": "String"
+                  },
+                  {
+                    "name": "number",
+                    "type": "text",
+                    "label": "Number"
+                  }
+                ],
+                "type": "collection",
+                "label": "Nom Calculé"
+              },
+              {
+                "name": "Status",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Status"
+              },
+              {
+                "name": "Ville",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Ville"
+              },
+              {
+                "name": "Client Email",
+                "type": "text",
+                "label": "Client Email"
+              },
+              {
+                "name": "Contract Signed",
+                "type": "boolean",
+                "label": "Contract Signed"
+              },
+              {
+                "name": "Nom Société",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Nom Société"
+              },
+              {
+                "name": "Client Space ",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  }
+                ],
+                "type": "array",
+                "label": "Client Space "
+              },
+              {
+                "name": "Name",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Name"
+              }
+            ],
+            "type": "collection",
+            "label": "Properties Value"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:notion2,notion3",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_NOTION}}"
+      }
+    }
+  ],
+  "name": "A1 : IBAN + DOCUSIGN",
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "designer": {
+      "orphans": [],
+      "samples": {
+        "1": {
+          "fields": {
+            "Nom": "Lecot",
+            "zip": null,
+            "city": null,
+            "name": null,
+            "email": null,
+            "phone": null,
+            "Adresse": "3 Rue D'Ormesson",
+            "Prénom": "Gabriel",
+            "address": null,
+            "company": null,
+            "Je suis :": [
+              "Particulier"
+            ],
+            "session_id": null,
+            "Numéro TVA": null,
+            "Téléphone": "+33604500940",
+            "Numéro SIRET": null,
+            "Email Professionel": "lecot.gabriel@gmail.com",
+            "Nom De La Société ": "",
+            "Je suis : (Entreprise)": false,
+            "Je suis : (Particulier)": true
+          },
+          "formId": "rjVra5",
+          "eventId": "cf538fd9-5392-464f-b7be-33879a81da3b",
+          "formName": "Informations Complémentaires  - Paiement Par Iban",
+          "createdAt": "2026-03-30T11:57:09.000Z",
+          "fieldsById": {
+            "question_0MV0kj": null,
+            "question_4kalrX": "+33604500940",
+            "question_5kX0VE": "",
+            "question_8kNDrP": "lecot.gabriel@gmail.com",
+            "question_E1qox4": "Lecot",
+            "question_PERZzV": "Gabriel",
+            "question_VlpWzg": [
+              "Particulier"
+            ],
+            "question_rKD8oN": "3 Rue D'Ormesson",
+            "question_zzEBd0": null,
+            "question_VlpWzg_176d91f6-0ba1-42af-9e12-d7b7317c196a": false,
+            "question_VlpWzg_1ad240af-6224-4562-ba9d-0675a757773a": true,
+            "question_dAbGzK_2747e65f-83c2-4d7d-b8ae-03e21d830ac8": null,
+            "question_dAbGzK_2d99870e-3257-4229-9c6d-3ecaa2a662dd": null,
+            "question_dAbGzK_69904fe6-121e-47cc-bd96-dbb0f48aa37f": null,
+            "question_dAbGzK_6d27405e-679e-4a85-a317-3b50ddb816e5": null,
+            "question_dAbGzK_8c5f3b5c-62b1-4290-8f6b-c8bd9f07e042": null,
+            "question_dAbGzK_ca11cd63-3753-4ad7-ba62-5b0e2ae355c1": null,
+            "question_dAbGzK_d9f0fa41-ce6e-467b-bc28-8209c207f8b4": null,
+            "question_dAbGzK_e8e40c33-c65c-4ba0-a959-694d75fb8ded": null
+          },
+          "responseId": "1WAepQQ",
+          "respondentId": "aQ07pQW",
+          "submissionId": "1WAepQQ"
+        },
+        "3": {
+          "nom": "Lecot",
+          "tva": null,
+          "Siret": null,
+          "email": "lecot.gabriel@gmail.com",
+          "ville": null,
+          "prenom": "Gabriel",
+          "adresse": "3 Rue D'Ormesson",
+          "telephone": "+33604500940",
+          "code_postal": null,
+          "nom_societe": null,
+          "date_contrat": "30/03/2026"
+        },
+        "4": {
+          "id": "1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoaEBNnv5Uk8U",
+          "kind": "drive#file",
+          "name": "Onboarding Automatisé",
+          "size": "24816",
+          "owners": [
+            {
+              "me": true,
+              "kind": "drive#user",
+              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+              "displayName": "gabriel lecot",
+              "emailAddress": "lecot.gabriel@gmail.com",
+              "permissionId": "02512538461943713916"
+            }
+          ],
+          "shared": false,
+          "spaces": [
+            "drive"
+          ],
+          "parents": [
+            "{{GOOGLE_DRIVE_FOLDER_ID}}"
+          ],
+          "starred": false,
+          "trashed": false,
+          "version": "4",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document",
+          "mimeType": "application/vnd.google-apps.document",
+          "ownedByMe": true,
+          "viewedByMe": true,
+          "createdTime": "2026-03-30T11:57:10.096Z",
+          "exportLinks": {
+            "text/html": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "text/plain": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "text/markdown": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/pdf": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/rtf": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "text/x-markdown": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/epub+zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/vnd.oasis.opendocument.text": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa...",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "https://docs.google.com/feeds/download/documents/export/Export?id=1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoa..."
+          },
+          "permissions": [
+            {
+              "id": "02512538461943713916",
+              "kind": "drive#permission",
+              "role": "owner",
+              "type": "user",
+              "deleted": false,
+              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+              "displayName": "gabriel lecot",
+              "emailAddress": "lecot.gabriel@gmail.com",
+              "pendingOwner": false,
+              "permissionDetails": [
+                {
+                  "role": "owner",
+                  "inherited": true,
+                  "permissionType": "file"
+                }
+              ]
+            }
+          ],
+          "webViewLink": "https://docs.google.com/document/d/1zkqGiqb7xQyxuLJXJRYHqQ7dZFh5RoXoaEBNnv5Uk8U/edit?usp=drivesdk",
+          "capabilities": {
+            "canCopy": true,
+            "canEdit": true,
+            "canShare": true,
+            "canTrash": true,
+            "canDelete": true,
+            "canRename": true,
+            "canComment": true,
+            "canUntrash": true,
+            "canDownload": true,
+            "canReadLabels": false,
+            "canAddChildren": false,
+            "canListChildren": false,
+            "canModifyLabels": false,
+            "canModifyContent": true,
+            "canReadRevisions": true,
+            "canRemoveChildren": false,
+            "canAcceptOwnership": false,
+            "canAddMyDriveParent": false,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRemoveMyDriveParent": true,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveChildrenWithinDrive": false,
+            "canModifyContentRestriction": true,
+            "canRemoveContentRestriction": false,
+            "canEnableInheritedPermissions": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canDisableInheritedPermissions": false,
+            "canChangeItemDownloadRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canChangeCopyRequiresWriterPermission": true
+          },
+          "hasThumbnail": true,
+          "modifiedByMe": true,
+          "modifiedTime": "2026-03-30T11:57:10.096Z",
+          "permissionIds": [
+            "02512538461943713916"
+          ],
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBM4dowZs8nTCeCXm2y7dIjbiom_iRyXLKqKK5yr_W7k2vFA...",
+          "quotaBytesUsed": "24816",
+          "viewedByMeTime": "2026-03-30T11:48:04.617Z",
+          "isAppAuthorized": true,
+          "writersCanShare": true,
+          "modifiedByMeTime": "2026-03-30T11:57:10.096Z",
+          "thumbnailVersion": "1",
+          "explicitlyTrashed": false,
+          "lastModifyingUser": {
+            "me": true,
+            "kind": "drive#user",
+            "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+            "displayName": "gabriel lecot",
+            "emailAddress": "lecot.gabriel@gmail.com",
+            "permissionId": "02512538461943713916"
+          },
+          "linkShareMetadata": {
+            "securityUpdateEnabled": true,
+            "securityUpdateEligible": false
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "inheritedPermissionsDisabled": false
+        },
+        "14": {
+          "uri": "/envelopes/20fb9ee2-273c-4fcf-8afb-414573d371ae",
+          "status": "sent",
+          "envelopeId": "20fb9ee2-273c-4fcf-8afb-414573d371ae",
+          "statusDateTime": "2026-03-30T11:49:51.193Z"
+        },
+        "23": {
+          "id": "33345ca2-a462-81e6-ba7d-deb059a70ce4",
+          "url": "https://www.notion.so/Moula-BUSINESS-LTD-33345ca2a46281e6ba7ddeb059a70ce4",
+          "icon": null,
+          "cover": null,
+          "object": "page",
+          "parent": {
+            "type": "data_source_id",
+            "database_id": "{{NOTION_DB_CLIENT_ID}}",
+            "data_source_id": "2d145ca2-a462-816e-aa67-000bd4d5b292"
+          },
+          "archived": false,
+          "in_trash": false,
+          "is_locked": false,
+          "created_by": {
+            "id": "7977a22e-b57d-4d6f-96b2-7e7823a9a963",
+            "object": "user"
+          },
+          "properties": [
+            {
+              "id": "title",
+              "url": null,
+              "type": "title",
+              "email": "lecot.gabriel@gmail.com",
+              "files": [],
+              "label": "Name",
+              "title": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Moula BUSINESS LTD "
+                  },
+                  "type": "text",
+                  "plain_text": "Moula BUSINESS LTD ",
+                  "annotations": {
+                    "bold": false,
+                    "code": false,
+                    "color": "default",
+                    "italic": false,
+                    "underline": false,
+                    "strikethrough": false
+                  }
+                }
+              ],
+              "status": {
+                "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+                "name": "Not started",
+                "color": "default"
+              },
+              "formula": {
+                "type": "string",
+                "string": "Espace Client -  Moula BUSINESS LTD"
+              },
+              "checkbox": null,
+              "has_more": null,
+              "relation": [],
+              "rich_text": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Moula BUSINESS LTD "
+                  },
+                  "type": "text",
+                  "plain_text": "Moula BUSINESS LTD ",
+                  "annotations": {
+                    "bold": null,
+                    "code": null,
+                    "color": "default",
+                    "italic": null,
+                    "underline": null,
+                    "strikethrough": null
+                  }
+                }
+              ],
+              "created_time": {}
+            }
+          ],
+          "public_url": null,
+          "request_id": "9210a04e-740a-4818-b136-564ab31976d5",
+          "is_archived": false,
+          "created_time": "2026-03-30T11:49:00.000Z",
+          "last_edited_by": {
+            "id": "7977a22e-b57d-4d6f-96b2-7e7823a9a963",
+            "object": "user"
+          },
+          "last_edited_time": "2026-03-30T11:49:00.000Z",
+          "properties_value": {
+            "Name": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Moula BUSINESS LTD "
+                },
+                "type": "text",
+                "plain_text": "Moula BUSINESS LTD ",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "date": "2026-03-30T11:49:00.000Z",
+            "Ville": [],
+            "Status": {
+              "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+              "name": "Not started",
+              "color": "default"
+            },
+            "Adresse": [],
+            "Code Postal": [],
+            "Cover Image": [],
+            "Client Email": "lecot.gabriel@gmail.com",
+            "Nom Calculé": {
+              "type": "string",
+              "string": "Espace Client -  Moula BUSINESS LTD"
+            },
+            "Client Space ": [],
+            "Nom Société": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Moula BUSINESS LTD "
+                },
+                "type": "text",
+                "plain_text": "Moula BUSINESS LTD ",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Client Invited": false,
+            "Contract Signed": false,
+            "Lien Contrat Client ": null
+          }
+        },
+        "43": {
+          "data": "IMTBuffer(125816, binary, e3e36941fc06e61783ac236b1e039cba71e1eca4): 255044462d312e340a25d3ebe9e10a3...",
+          "filename": "Onboarding Automatisé.pdf"
+        },
+        "76": {
+          "nom_sign": "Lecot",
+          "file_name": null,
+          "email_sign": "lecot.gabriel@gmail.com",
+          "prenom_sign": "Gabriel",
+          "nom_affichage": "Client",
+          "titre_contrat": "Onboarding Automatisé",
+          "nom_complet_sign": "Client"
+        }
+      }
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  },
+  "scheduling": {
+    "type": "immediately",
+    "maximum_runs_per_minute": null
+  },
+  "interface": {
+    "input": [],
+    "output": []
+  }
+}

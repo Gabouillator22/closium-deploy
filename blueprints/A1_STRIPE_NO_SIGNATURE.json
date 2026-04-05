@@ -1,0 +1,4732 @@
+{
+  "flow": [
+    {
+      "id": 1,
+      "mapper": {},
+      "module": "tally:watchNewResponse",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTHOOK__": {
+              "data": {
+                "editable": "false"
+              },
+              "label": "My New Response webhook"
+            }
+          }
+        },
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "eventId",
+            "type": "text",
+            "label": "Event ID"
+          },
+          {
+            "name": "responseId",
+            "type": "text",
+            "label": "Response ID"
+          },
+          {
+            "name": "submissionId",
+            "type": "text",
+            "label": "Submission ID"
+          },
+          {
+            "name": "respondentId",
+            "type": "text",
+            "label": "Respondent ID"
+          },
+          {
+            "name": "formId",
+            "type": "text",
+            "label": "Form ID"
+          },
+          {
+            "name": "formName",
+            "type": "text",
+            "label": "Form Name"
+          },
+          {
+            "name": "createdAt",
+            "type": "date",
+            "label": "Created at"
+          },
+          {
+            "name": "fields",
+            "spec": [
+              {
+                "name": "Prénom",
+                "type": "text"
+              },
+              {
+                "name": "Nom",
+                "type": "text"
+              },
+              {
+                "name": "Profession",
+                "type": "text"
+              },
+              {
+                "name": "1,2,3",
+                "type": "text"
+              },
+              {
+                "name": "(kg)",
+                "type": "text"
+              },
+              {
+                "name": "(kg)",
+                "type": "text"
+              },
+              {
+                "name": "bodyfat(%)",
+                "type": "text"
+              },
+              {
+                "name": "1,2,3",
+                "type": "number"
+              },
+              {
+                "name": "richbody@gmail.com",
+                "type": "email"
+              }
+            ],
+            "type": "collection",
+            "label": "Fields"
+          },
+          {
+            "name": "fieldsById",
+            "spec": [
+              {
+                "name": "question_0VM2dQ",
+                "type": "text",
+                "label": "Prénom"
+              },
+              {
+                "name": "question_zEzpjE",
+                "type": "text",
+                "label": "Nom"
+              },
+              {
+                "name": "question_5Xk68d",
+                "type": "text",
+                "label": "Profession"
+              },
+              {
+                "name": "question_2jrxD9",
+                "type": "text",
+                "label": "1,2,3"
+              },
+              {
+                "name": "question_laAoB6",
+                "type": "text",
+                "label": "(kg)"
+              },
+              {
+                "name": "question_rDKNQX",
+                "type": "text",
+                "label": "(kg)"
+              },
+              {
+                "name": "question_dbALKA",
+                "type": "text",
+                "label": "bodyfat(%)"
+              },
+              {
+                "name": "question_YjOEpd",
+                "type": "number",
+                "label": "1,2,3"
+              },
+              {
+                "name": "question_7XZV8Z",
+                "type": "email",
+                "label": "richbody@gmail.com"
+              }
+            ],
+            "type": "collection",
+            "label": "Fields by ID"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTHOOK__",
+            "type": "hook:tally",
+            "label": "Webhook",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTHOOK__": "{{HOOK_TALLY_A1_STRIPE_NS}}"
+      }
+    },
+    {
+      "id": 40,
+      "mapper": {
+        "url": "https://api.stripe.com/v1/checkout/sessions/{{1.fields.session_id}}",
+        "method": "get",
+        "shareCookies": false,
+        "parseResponse": true,
+        "allowRedirects": true,
+        "stopOnHttpError": true,
+        "requestCompressedContent": true
+      },
+      "module": "http:MakeRequest",
+      "version": 4,
+      "metadata": {
+        "restore": {
+          "expect": {
+            "method": {
+              "mode": "chose",
+              "label": "GET"
+            },
+            "headers": {
+              "mode": "chose"
+            },
+            "contentType": {
+              "label": "Empty"
+            },
+            "shareCookies": {
+              "mode": "chose"
+            },
+            "parseResponse": {
+              "mode": "chose"
+            },
+            "allowRedirects": {
+              "mode": "chose"
+            },
+            "paginationType": {
+              "label": "Empty"
+            },
+            "queryParameters": {
+              "mode": "chose"
+            },
+            "stopOnHttpError": {
+              "mode": "chose"
+            },
+            "requestCompressedContent": {
+              "mode": "chose"
+            }
+          },
+          "parameters": {
+            "tlsType": {
+              "label": "Empty"
+            },
+            "proxyKeychain": {
+              "label": "Choose a key"
+            },
+            "basicAuthKeychain": {
+              "label": "Stripe Test 3"
+            },
+            "authenticationType": {
+              "label": "Basic auth"
+            }
+          }
+        },
+        "designer": {
+          "x": 300,
+          "y": 0
+        }
+      },
+      "parameters": {
+        "tlsType": "",
+        "proxyKeychain": "",
+        "basicAuthKeychain": 186678,
+        "authenticationType": "basicAuth"
+      }
+    },
+    {
+      "id": 3,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "nom_client",
+            "value": "{{40.data.collected_information.individual_name}}"
+          },
+          {
+            "name": "telephone",
+            "value": "{{40.data.customer_details.phone}}"
+          },
+          {
+            "name": "email",
+            "value": "{{1.fields.`Email Professionel`}}"
+          },
+          {
+            "name": "nom_societe",
+            "value": "{{trim(ifempty(40.data.customer_details.name; join(40.data.custom_fields[1].text.value; ; 40.data.custom_fields[2].text.value)))}}"
+          },
+          {
+            "name": "Siret",
+            "value": "{{1.fields.`Numéro SIRET`}}"
+          },
+          {
+            "name": "adresse",
+            "value": "{{40.data.customer_details.address.line1}}"
+          },
+          {
+            "name": "code_postal",
+            "value": "{{40.data.customer_details.address.postal_code}}"
+          },
+          {
+            "name": "ville",
+            "value": "{{40.data.customer_details.address.city}}"
+          },
+          {
+            "name": "montant",
+            "value": ""
+          },
+          {
+            "name": "tva",
+            "value": "{{1.fields.`Numéro TVA`}}"
+          },
+          {
+            "name": "date_contrat",
+            "value": "{{formatDate(now; \"DD/MM/YYYY\")}}"
+          },
+          {
+            "name": "prenom",
+            "value": "{{40.data.custom_fields[1].text.value}}"
+          },
+          {
+            "name": "nom",
+            "value": "{{40.data.custom_fields[2].text.value}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "variables",
+            "spec": [
+              {
+                "name": "name",
+                "type": "text",
+                "label": "Variable name",
+                "required": true
+              },
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Variable value"
+              }
+            ],
+            "type": "array",
+            "label": "Variables"
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          }
+        ],
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            },
+            "variables": {
+              "items": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          }
+        },
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "nom_client",
+            "type": "any",
+            "label": "nom_client"
+          },
+          {
+            "name": "telephone",
+            "type": "any",
+            "label": "telephone"
+          },
+          {
+            "name": "email",
+            "type": "any",
+            "label": "email"
+          },
+          {
+            "name": "nom_societe",
+            "type": "any",
+            "label": "nom_societe"
+          },
+          {
+            "name": "Siret",
+            "type": "any",
+            "label": "Siret"
+          },
+          {
+            "name": "adresse",
+            "type": "any",
+            "label": "adresse"
+          },
+          {
+            "name": "code_postal",
+            "type": "any",
+            "label": "code_postal"
+          },
+          {
+            "name": "ville",
+            "type": "any",
+            "label": "ville"
+          },
+          {
+            "name": "montant",
+            "type": "any",
+            "label": "montant"
+          },
+          {
+            "name": "tva",
+            "type": "any",
+            "label": "tva"
+          },
+          {
+            "name": "date_contrat",
+            "type": "any",
+            "label": "date_contrat"
+          },
+          {
+            "name": "prenom",
+            "type": "any",
+            "label": "prenom"
+          },
+          {
+            "name": "nom",
+            "type": "any",
+            "label": "nom"
+          }
+        ]
+      },
+      "parameters": {}
+    },
+    {
+      "id": 76,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "nom_affichage",
+            "value": "{{trim(ifempty(3.nom_societe; join(3.prenom; ; 3.nom)))}}"
+          },
+          {
+            "name": "titre_contrat",
+            "value": "Contrat Genesis - Installation De Système D'Onboarding"
+          },
+          {
+            "name": "file_name",
+            "value": "{{join(\"Contrat Sentinel - \"; trim(ifempty(3.nom_societe; join(3.prenom; ; 3.nom))); \".pdf\")}}"
+          },
+          {
+            "name": "email_sign",
+            "value": "{{3.email}}"
+          },
+          {
+            "name": "prenom_sign",
+            "value": "{{ifempty(3.prenom; 3.nom_societe)}}"
+          },
+          {
+            "name": "nom_sign",
+            "value": "{{ifempty(3.nom; \"\")}}"
+          },
+          {
+            "name": "nom_complet_sign",
+            "value": "{{trim(join(ifempty(3.prenom; 3.nom_societe); ; ifempty(3.nom; \"\")))}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "variables",
+            "spec": [
+              {
+                "name": "name",
+                "type": "text",
+                "label": "Variable name",
+                "required": true
+              },
+              {
+                "name": "value",
+                "type": "any",
+                "label": "Variable value"
+              }
+            ],
+            "type": "array",
+            "label": "Variables"
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          }
+        ],
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            },
+            "variables": {
+              "items": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              ]
+            }
+          }
+        },
+        "designer": {
+          "x": 900,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "nom_affichage",
+            "type": "any",
+            "label": "nom_affichage"
+          },
+          {
+            "name": "titre_contrat",
+            "type": "any",
+            "label": "titre_contrat"
+          },
+          {
+            "name": "file_name",
+            "type": "any",
+            "label": "file_name"
+          },
+          {
+            "name": "email_sign",
+            "type": "any",
+            "label": "email_sign"
+          },
+          {
+            "name": "prenom_sign",
+            "type": "any",
+            "label": "prenom_sign"
+          },
+          {
+            "name": "nom_sign",
+            "type": "any",
+            "label": "nom_sign"
+          },
+          {
+            "name": "nom_complet_sign",
+            "type": "any",
+            "label": "nom_complet_sign"
+          }
+        ]
+      },
+      "parameters": {}
+    },
+    {
+      "id": 4,
+      "mapper": {
+        "from": "drive",
+        "name": "{{76.titre_contrat}}",
+        "select": "dropdown",
+        "document": "/{{GOOGLE_TEMPLATE_DOC_ID}}",
+        "folderId": "/{{GOOGLE_DRIVE_FOLDER_ID}}/1CYtskAt5_D7vvbIPwxxL4HUoJNWgtXbY",
+        "requests": {
+          "Siret": "{{3.Siret}}",
+          "email": "{{3.email}}",
+          "ville": "{{3.ville}}",
+          "adresse": "{{3.adresse}}",
+          "telephone": "{{3.telephone}}",
+          "nom_client": "{{76.nom_affichage}}",
+          "code_postal": "{{3.code_postal}}",
+          "nom_societe": "{{3.nom_societe}}",
+          "date_contrat": "{{3.date_contrat}}",
+          "date_signature": "{{now}}"
+        },
+        "destination": "drive"
+      },
+      "module": "google-docs:createADocumentFromTemplate",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Create a Document from a Template",
+            "required": true,
+            "validate": {
+              "enum": [
+                "map",
+                "dropdown"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "label": "Title",
+            "required": true
+          },
+          {
+            "name": "destination",
+            "type": "select",
+            "label": "New Drive Location",
+            "required": true,
+            "validate": {
+              "enum": [
+                "drive",
+                "share",
+                "team"
+              ]
+            }
+          },
+          {
+            "name": "from",
+            "type": "select",
+            "label": "Choose a Drive",
+            "required": true,
+            "validate": {
+              "enum": [
+                "drive",
+                "share",
+                "team"
+              ]
+            }
+          },
+          {
+            "name": "document",
+            "type": "file",
+            "label": "Document ID",
+            "required": true
+          },
+          {
+            "name": "requests",
+            "spec": [
+              {
+                "name": "nom_societe",
+                "type": "any"
+              },
+              {
+                "name": "Siret",
+                "type": "any"
+              },
+              {
+                "name": "adresse",
+                "type": "any"
+              },
+              {
+                "name": "code_postal",
+                "type": "any"
+              },
+              {
+                "name": "ville",
+                "type": "any"
+              },
+              {
+                "name": "nom_client",
+                "type": "any"
+              },
+              {
+                "name": "email",
+                "type": "any"
+              },
+              {
+                "name": "telephone",
+                "type": "any"
+              },
+              {
+                "name": "date_signature",
+                "type": "any"
+              },
+              {
+                "name": "date_contrat",
+                "type": "any"
+              }
+            ],
+            "type": "collection",
+            "label": "Values"
+          },
+          {
+            "name": "folderId",
+            "type": "folder",
+            "label": "New Document's Location",
+            "required": true
+          }
+        ],
+        "restore": {
+          "expect": {
+            "from": {
+              "label": "My Drive"
+            },
+            "select": {
+              "label": "By Dropdown"
+            },
+            "document": {
+              "path": [
+                "[TEMPLATE] Contrat Prestation — Sentinel OS"
+              ]
+            },
+            "folderId": {
+              "mode": "chose",
+              "path": [
+                "Automatisation Création De Contrat ",
+                "Exemplaires De Contrats Client "
+              ]
+            },
+            "destination": {
+              "label": "My Drive"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              },
+              "label": "My Google connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1200,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GOOGLE}}"
+      }
+    },
+    {
+      "id": 43,
+      "mapper": {
+        "document": "{{4.id}}",
+        "mimeType": "application/pdf",
+        "destination": "drive"
+      },
+      "module": "google-docs:exportADocument",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "expect": {
+            "document": {
+              "mode": "edit",
+              "path": []
+            },
+            "mimeType": {
+              "mode": "chose",
+              "label": "PDF Document (.pdf)"
+            },
+            "destination": {
+              "label": "My Drive"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              },
+              "label": "My Google connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1500,
+          "y": 0,
+          "name": "Convert Doc To PDF"
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GOOGLE}}"
+      }
+    },
+    {
+      "id": 23,
+      "mapper": {
+        "fields": {
+          "Meoy": "{{4.exportLinks.`application/pdf`}}",
+          "hGIT": "{{3.ville}}",
+          "s~ZP": "{{76.email_sign}}",
+          "title": "{{76.nom_affichage}}",
+          "Dy%3CB": "{{3.code_postal}}",
+          "VIO%3E": "{{3.adresse}}",
+          "z%3ERN": "{{76.nom_affichage}}"
+        },
+        "select": "list",
+        "database": "{{NOTION_DB_CLIENT_ID}}"
+      },
+      "module": "notion:createAPage",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Enter a Database ID",
+            "required": true,
+            "validate": {
+              "enum": [
+                "map",
+                "list"
+              ]
+            }
+          },
+          {
+            "name": "database",
+            "type": "text",
+            "label": "Database ID",
+            "required": true
+          },
+          {
+            "name": "fields",
+            "spec": [
+              {
+                "name": "title",
+                "type": "text",
+                "label": "Name",
+                "metadata": {
+                  "type": "title"
+                },
+                "required": true
+              },
+              {
+                "name": "Dy%3CB",
+                "type": "text",
+                "label": "Code Postal",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "Gd%3EJ",
+                "type": "boolean",
+                "label": "Client Invited",
+                "metadata": {
+                  "type": "checkbox"
+                }
+              },
+              {
+                "name": "G%7DbN",
+                "spec": [
+                  {
+                    "name": "url",
+                    "type": "url",
+                    "label": "Image URL",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "File Name"
+                  }
+                ],
+                "type": "array",
+                "label": "Cover Image",
+                "metadata": {
+                  "type": "files"
+                }
+              },
+              {
+                "name": "Meoy",
+                "type": "url",
+                "label": "Lien Contrat Client ",
+                "metadata": {
+                  "type": "url"
+                }
+              },
+              {
+                "name": "VIO%3E",
+                "type": "text",
+                "label": "Adresse",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "cNrm",
+                "type": "select",
+                "label": "Status",
+                "metadata": {
+                  "type": "status"
+                },
+                "validate": {
+                  "enum": [
+                    "Not started",
+                    "Stage 6",
+                    "Stage 5",
+                    "Stage 4",
+                    "Stage 3",
+                    "Stage 2",
+                    "Stage 1",
+                    "Stage 0",
+                    "Project Complete"
+                  ]
+                }
+              },
+              {
+                "name": "hGIT",
+                "type": "text",
+                "label": "Ville",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "s~ZP",
+                "type": "email",
+                "label": "Client Email",
+                "metadata": {
+                  "type": "email"
+                }
+              },
+              {
+                "name": "thQo",
+                "type": "boolean",
+                "label": "Contract Signed",
+                "metadata": {
+                  "type": "checkbox"
+                }
+              },
+              {
+                "name": "z%3ERN",
+                "type": "text",
+                "label": "Nom Société",
+                "metadata": {
+                  "type": "rich_text"
+                }
+              },
+              {
+                "name": "%7CZYh",
+                "type": "select",
+                "label": "Client Space ",
+                "metadata": {
+                  "type": "relation"
+                },
+                "multiple": true
+              }
+            ],
+            "type": "collection",
+            "label": "Fields"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "fields": {
+              "nested": {
+                "cNrm": {
+                  "mode": "chose",
+                  "label": "Empty"
+                },
+                "thQo": {
+                  "mode": "chose"
+                },
+                "%7CZYh": {
+                  "mode": "chose"
+                },
+                "G%7DbN": {
+                  "mode": "chose"
+                },
+                "Gd%3EJ": {
+                  "mode": "chose"
+                }
+              }
+            },
+            "select": {
+              "label": "Select from the list"
+            },
+            "database": {
+              "nested": [
+                {
+                  "name": "fields",
+                  "spec": [
+                    {
+                      "name": "title",
+                      "type": "text",
+                      "label": "Name",
+                      "metadata": {
+                        "type": "title"
+                      },
+                      "required": true
+                    },
+                    {
+                      "name": "Dy%3CB",
+                      "type": "text",
+                      "label": "Code Postal",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "Gd%3EJ",
+                      "type": "boolean",
+                      "label": "Client Invited",
+                      "metadata": {
+                        "type": "checkbox"
+                      }
+                    },
+                    {
+                      "name": "G%7DbN",
+                      "spec": [
+                        {
+                          "name": "url",
+                          "type": "url",
+                          "label": "Image URL",
+                          "required": true
+                        },
+                        {
+                          "help": "If empty, the file name will have **Integromat** .",
+                          "name": "name",
+                          "type": "text",
+                          "label": "File Name"
+                        }
+                      ],
+                      "type": "array",
+                      "label": "Cover Image",
+                      "metadata": {
+                        "type": "files"
+                      }
+                    },
+                    {
+                      "name": "Meoy",
+                      "type": "url",
+                      "label": "Lien Contrat Client ",
+                      "metadata": {
+                        "type": "url"
+                      }
+                    },
+                    {
+                      "name": "VIO%3E",
+                      "type": "text",
+                      "label": "Adresse",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "cNrm",
+                      "type": "select",
+                      "label": "Status",
+                      "grouped": true,
+                      "options": [
+                        {
+                          "label": "To-do",
+                          "options": [
+                            {
+                              "label": "Not started",
+                              "value": "Not started"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "In progress",
+                          "options": [
+                            {
+                              "label": "Stage 6",
+                              "value": "Stage 6"
+                            },
+                            {
+                              "label": "Stage 5",
+                              "value": "Stage 5"
+                            },
+                            {
+                              "label": "Stage 4",
+                              "value": "Stage 4"
+                            },
+                            {
+                              "label": "Stage 3",
+                              "value": "Stage 3"
+                            },
+                            {
+                              "label": "Stage 2",
+                              "value": "Stage 2"
+                            },
+                            {
+                              "label": "Stage 1",
+                              "value": "Stage 1"
+                            },
+                            {
+                              "label": "Stage 0",
+                              "value": "Stage 0"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "Complete",
+                          "options": [
+                            {
+                              "label": "Project Complete",
+                              "value": "Project Complete"
+                            }
+                          ]
+                        }
+                      ],
+                      "metadata": {
+                        "type": "status"
+                      }
+                    },
+                    {
+                      "name": "hGIT",
+                      "type": "text",
+                      "label": "Ville",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "s~ZP",
+                      "type": "email",
+                      "label": "Client Email",
+                      "metadata": {
+                        "type": "email"
+                      }
+                    },
+                    {
+                      "name": "thQo",
+                      "type": "boolean",
+                      "label": "Contract Signed",
+                      "metadata": {
+                        "type": "checkbox"
+                      }
+                    },
+                    {
+                      "name": "z%3ERN",
+                      "type": "text",
+                      "label": "Nom Société",
+                      "metadata": {
+                        "type": "rich_text"
+                      }
+                    },
+                    {
+                      "name": "%7CZYh",
+                      "type": "select",
+                      "label": "Client Space ",
+                      "options": "rpc://notion/1/listDatabaseItems?database=2d145ca2-a462-8184-9430-d9de2452f4e1",
+                      "metadata": {
+                        "type": "relation"
+                      },
+                      "multiple": true
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Fields"
+                }
+              ],
+              "rpcSearch": {
+                "label": "Client Portal Hub",
+                "value": "{{NOTION_DB_CLIENT_ID}}"
+              }
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "notion3"
+              },
+              "label": "lecot.gabriel@gmail.com"
+            }
+          }
+        },
+        "designer": {
+          "x": 1800,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "object",
+            "type": "text",
+            "label": "Object"
+          },
+          {
+            "name": "id",
+            "type": "text",
+            "label": "Database Item ID"
+          },
+          {
+            "name": "created_time",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "last_edited_time",
+            "type": "date",
+            "label": "Last Edited Time"
+          },
+          {
+            "name": "created_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Created by"
+          },
+          {
+            "name": "last_edited_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Last Edited by"
+          },
+          {
+            "name": "icon",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "emoji",
+                "type": "text",
+                "label": "Emoji"
+              }
+            ],
+            "type": "collection",
+            "label": "Icon"
+          },
+          {
+            "name": "cover",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "external",
+                "spec": [
+                  {
+                    "name": "url",
+                    "type": "text",
+                    "label": "URL"
+                  }
+                ],
+                "type": "collection",
+                "label": "External"
+              }
+            ],
+            "type": "collection",
+            "label": "Cover"
+          },
+          {
+            "name": "url",
+            "type": "text",
+            "label": "URL"
+          },
+          {
+            "name": "parent",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "workspace",
+                "type": "boolean",
+                "label": "Workspace"
+              },
+              {
+                "name": "page_id",
+                "type": "text",
+                "label": "Page ID"
+              },
+              {
+                "name": "database_id",
+                "type": "text",
+                "label": "Database ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Parent"
+          },
+          {
+            "name": "archived",
+            "type": "boolean",
+            "label": "Archived"
+          },
+          {
+            "name": "properties",
+            "spec": {
+              "spec": [
+                {
+                  "name": "id",
+                  "type": "text",
+                  "label": "ID"
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "label": "Type"
+                },
+                {
+                  "name": "people",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                      },
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "avatar_url",
+                        "type": "text",
+                        "label": "Avatar Url"
+                      },
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "person",
+                        "spec": [
+                          {
+                            "name": "email",
+                            "type": "text",
+                            "label": "Email"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Person"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "People"
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "label": "URL"
+                },
+                {
+                  "name": "text",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Text"
+                },
+                {
+                  "name": "select",
+                  "spec": [
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "color",
+                      "type": "text",
+                      "label": "Color"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Select"
+                },
+                {
+                  "name": "email",
+                  "type": "text",
+                  "label": "Email"
+                },
+                {
+                  "name": "phone_number",
+                  "type": "text",
+                  "label": "Phone Number"
+                },
+                {
+                  "name": "multi_select",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Multi Select"
+                },
+                {
+                  "name": "date",
+                  "spec": [
+                    {
+                      "name": "start",
+                      "type": "text",
+                      "label": "Start"
+                    },
+                    {
+                      "name": "end",
+                      "type": "text",
+                      "label": "End"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Date"
+                },
+                {
+                  "name": "checkbox",
+                  "type": "boolean",
+                  "label": "Checkbox"
+                },
+                {
+                  "name": "number",
+                  "type": "number",
+                  "label": "Number"
+                },
+                {
+                  "name": "files",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Files"
+                },
+                {
+                  "name": "title",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Title"
+                },
+                {
+                  "name": "last_edited_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Last Edited Time"
+                },
+                {
+                  "name": "created_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Created Time"
+                },
+                {
+                  "name": "last_edited_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Last Edited By"
+                },
+                {
+                  "name": "created_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Created By"
+                },
+                {
+                  "name": "formula",
+                  "spec": [
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "string",
+                      "type": "text",
+                      "label": "String"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Formula"
+                },
+                {
+                  "name": "relation",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Relation"
+                },
+                {
+                  "name": "label",
+                  "type": "text",
+                  "label": "Label"
+                }
+              ],
+              "type": "collection"
+            },
+            "type": "array",
+            "label": "Properties"
+          },
+          {
+            "name": "properties_value",
+            "spec": [
+              {
+                "name": "Code Postal",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Code Postal"
+              },
+              {
+                "name": "Client Invited",
+                "type": "boolean",
+                "label": "Client Invited"
+              },
+              {
+                "name": "Cover Image",
+                "spec": [
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "file",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      },
+                      {
+                        "name": "expiry_time",
+                        "type": "date",
+                        "label": "Expiry Time"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "File"
+                  },
+                  {
+                    "name": "external",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "External"
+                  }
+                ],
+                "type": "array",
+                "label": "Cover Image"
+              },
+              {
+                "name": "date",
+                "type": "date",
+                "label": "date"
+              },
+              {
+                "name": "Lien Contrat Client ",
+                "type": "text",
+                "label": "Lien Contrat Client "
+              },
+              {
+                "name": "Adresse",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Adresse"
+              },
+              {
+                "name": "Nom Calculé",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "string",
+                    "type": "text",
+                    "label": "String"
+                  },
+                  {
+                    "name": "number",
+                    "type": "text",
+                    "label": "Number"
+                  }
+                ],
+                "type": "collection",
+                "label": "Nom Calculé"
+              },
+              {
+                "name": "Status",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Status"
+              },
+              {
+                "name": "Ville",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Ville"
+              },
+              {
+                "name": "Client Email",
+                "type": "text",
+                "label": "Client Email"
+              },
+              {
+                "name": "Contract Signed",
+                "type": "boolean",
+                "label": "Contract Signed"
+              },
+              {
+                "name": "Nom Société",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Nom Société"
+              },
+              {
+                "name": "Client Space ",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  }
+                ],
+                "type": "array",
+                "label": "Client Space "
+              },
+              {
+                "name": "Name",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Name"
+              }
+            ],
+            "type": "collection",
+            "label": "Properties Value"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:notion2,notion3",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_NOTION}}"
+      }
+    },
+    {
+      "id": 79,
+      "filter": null,
+      "mapper": {
+        "limit": "10",
+        "filter": [
+          [
+            {
+              "a": "email client |&*^%$#@| email",
+              "b": "{{23.properties_value.`Client Email`}}",
+              "o": "text:equals"
+            }
+          ]
+        ],
+        "select": "data_source_item",
+        "data_source": "{{NOTION_DB_SEARCH_ID}}"
+      },
+      "module": "notion:searchObjects1",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Search Objects",
+            "required": true,
+            "validate": {
+              "enum": [
+                "data_source_item",
+                "data_source",
+                "page",
+                "item",
+                "database"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit"
+          },
+          {
+            "name": "data_source",
+            "type": "text",
+            "label": "Data source ID",
+            "required": true
+          },
+          {
+            "name": "filter",
+            "type": "filter",
+            "label": "Filter",
+            "options": {
+              "store": [
+                {
+                  "label": "Trigger Automation Template (Checkbox)",
+                  "value": "Trigger Automation Template |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Client Invited (Checkbox)",
+                  "value": "Client Invited |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Mail Accès Client (Select)",
+                  "value": "Mail Accès Client |&*^%$#@| select"
+                },
+                {
+                  "label": "Cover Image (Files)",
+                  "value": "Cover Image |&*^%$#@| files"
+                },
+                {
+                  "label": "Client Portal Hub (Relation)",
+                  "value": "Client Portal Hub |&*^%$#@| relation"
+                },
+                {
+                  "label": "Nom Société (Rich text)",
+                  "value": "Nom Société |&*^%$#@| rich_text"
+                },
+                {
+                  "label": "Created time (Created time)",
+                  "value": "Created time |&*^%$#@| created_time"
+                },
+                {
+                  "label": "Lien Contrat  (Url)",
+                  "value": "Lien Contrat  |&*^%$#@| url"
+                },
+                {
+                  "label": "Status (Status)",
+                  "value": "Status |&*^%$#@| status"
+                },
+                {
+                  "label": "email client (Email)",
+                  "value": "email client |&*^%$#@| email"
+                },
+                {
+                  "label": "Contrat Signé  (Checkbox)",
+                  "value": "Contrat Signé  |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Espace Client  (Url)",
+                  "value": "Espace Client  |&*^%$#@| url"
+                },
+                {
+                  "label": "Name (Title)",
+                  "value": "Name |&*^%$#@| title"
+                }
+              ],
+              "operators": [
+                {
+                  "label": "Text",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "text:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "text:does_not_equal"
+                    },
+                    {
+                      "label": "Contains",
+                      "value": "text:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "text:does_not_contain"
+                    },
+                    {
+                      "label": "Starts with",
+                      "value": "text:starts_with"
+                    },
+                    {
+                      "label": "Ends with",
+                      "value": "text:ends_with"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "text:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "text:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Number",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "number:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "number:does_not_equal"
+                    },
+                    {
+                      "label": "Greater than",
+                      "value": "number:greater_than"
+                    },
+                    {
+                      "label": "Less than",
+                      "value": "number:less_than"
+                    },
+                    {
+                      "label": "Greater than or equal to",
+                      "value": "number:greater_than_or_equal_to"
+                    },
+                    {
+                      "label": "Less than or equal to",
+                      "value": "number:less_than_or_equal_to"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "number:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "number:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Date",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "date:equals"
+                    },
+                    {
+                      "label": "Before",
+                      "value": "date:before"
+                    },
+                    {
+                      "label": "After",
+                      "value": "date:after"
+                    },
+                    {
+                      "label": "On or before",
+                      "value": "date:on_or_before"
+                    },
+                    {
+                      "label": "On or after",
+                      "value": "date:on_or_after"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "date:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "date:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Checkbox",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "checkbox:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "checkbox:does_not_equal"
+                    }
+                  ]
+                },
+                {
+                  "label": "File",
+                  "options": [
+                    {
+                      "label": "Is empty",
+                      "value": "file:is_empty"
+                    },
+                    {
+                      "label": "Is not empty",
+                      "value": "file:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Select",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "select:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "select:does_not_equal"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "select:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "select:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Multi-select",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "multiselect:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "multiselect:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "multiselect:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "multiselect:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "People",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "people:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "people:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "people:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "people:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Relation",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "relation:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "relation:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "relation:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "relation:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Formula",
+                  "options": [
+                    {
+                      "label": "String - Equals",
+                      "value": "formula:text-equals"
+                    },
+                    {
+                      "label": "String - Does not equal",
+                      "value": "formula:text-does_not_equal"
+                    },
+                    {
+                      "label": "String - Contains",
+                      "value": "formula:text-contains"
+                    },
+                    {
+                      "label": "String - Does not contain",
+                      "value": "formula:text-does_not_contain"
+                    },
+                    {
+                      "label": "String - Starts with",
+                      "value": "formula:text-starts_with"
+                    },
+                    {
+                      "label": "String - Ends with",
+                      "value": "formula:text-ends_with"
+                    },
+                    {
+                      "label": "String - Is empty (Boolean)",
+                      "value": "formula:text-is_empty"
+                    },
+                    {
+                      "label": "Text - Is not empty (boolean)",
+                      "value": "formula:text-is_not_empty"
+                    },
+                    {
+                      "label": "Checkbox - Equals",
+                      "value": "formula:checkbox-equals"
+                    },
+                    {
+                      "label": "Checkbox - Does not equal",
+                      "value": "formula:checkbox-does_not_equal"
+                    },
+                    {
+                      "label": "Number - Equals",
+                      "value": "formula:number-equals"
+                    },
+                    {
+                      "label": "Number - Does not equal",
+                      "value": "formula:number-does_not_equal"
+                    },
+                    {
+                      "label": "Number - Greater than",
+                      "value": "formula:number-greater_than"
+                    },
+                    {
+                      "label": "Number - Less than",
+                      "value": "formula:number-less_than"
+                    },
+                    {
+                      "label": "Number - Greater than or equal to",
+                      "value": "formula:number-greater_than_or_equal_to"
+                    },
+                    {
+                      "label": "Number - Less than or equal to",
+                      "value": "formula:number-less_than_or_equal_to"
+                    },
+                    {
+                      "label": "Number - Is empty (Boolean)",
+                      "value": "formula:number-is_empty"
+                    },
+                    {
+                      "label": "Number - Is not empty (boolean)",
+                      "value": "formula:number-is_not_empty"
+                    },
+                    {
+                      "label": "Date - Equals",
+                      "value": "formula:date-equals"
+                    },
+                    {
+                      "label": "Date - before",
+                      "value": "formula:date-before"
+                    },
+                    {
+                      "label": "Date - after",
+                      "value": "formula:date-after"
+                    },
+                    {
+                      "label": "Date - On or before",
+                      "value": "formula:date-on_or_before"
+                    },
+                    {
+                      "label": "Date - On or after",
+                      "value": "formula:date-on_or_after"
+                    },
+                    {
+                      "label": "Date - Is empty (Boolean)",
+                      "value": "formula:date-is_empty"
+                    },
+                    {
+                      "label": "Date - Is not empty (boolean)",
+                      "value": "formula:date-is_not_empty"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "sorts",
+            "spec": [
+              {
+                "name": "select",
+                "type": "select",
+                "label": "Select a Field to Sort",
+                "options": [
+                  {
+                    "label": "Property Field",
+                    "value": "property",
+                    "nested": [
+                      {
+                        "name": "property",
+                        "type": "select",
+                        "label": "Property Field",
+                        "options": "rpc://notion/1/listDatabasePropertiesFieldsForFilter?sortParameter=true",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Timestamp",
+                    "value": "timestamp",
+                    "nested": [
+                      {
+                        "name": "timestamp",
+                        "type": "select",
+                        "label": "Timestamp",
+                        "options": [
+                          {
+                            "label": "Created time",
+                            "value": "created_time",
+                            "default": true
+                          },
+                          {
+                            "label": "Last edited time",
+                            "value": "last_edited_time"
+                          }
+                        ],
+                        "required": true
+                      }
+                    ],
+                    "default": true
+                  }
+                ],
+                "required": true
+              },
+              {
+                "name": "direction",
+                "type": "select",
+                "label": "Direction",
+                "options": [
+                  {
+                    "label": "Ascending",
+                    "value": "ascending"
+                  },
+                  {
+                    "label": "Descending",
+                    "value": "descending"
+                  }
+                ],
+                "required": true
+              }
+            ],
+            "type": "array",
+            "label": "Sorts"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "sorts": {
+              "mode": "chose"
+            },
+            "select": {
+              "label": "Data Source ItemsThis must be used if your database has multiple data sources."
+            },
+            "data_source": {
+              "rpcSearch": {
+                "label": "Base Portails Client",
+                "value": "{{NOTION_DB_SEARCH_ID}}"
+              }
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "notion3"
+              },
+              "label": "lecot.gabriel@gmail.com"
+            }
+          }
+        },
+        "designer": {
+          "x": 2100,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "__IMTLENGTH__",
+            "type": "uinteger",
+            "label": "Total number of bundles"
+          },
+          {
+            "name": "__IMTINDEX__",
+            "type": "uinteger",
+            "label": "Bundle order position"
+          },
+          {
+            "name": "object",
+            "type": "text",
+            "label": "Object"
+          },
+          {
+            "name": "id",
+            "type": "text",
+            "label": "Page ID"
+          },
+          {
+            "name": "created_time",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "last_edited_time",
+            "type": "date",
+            "label": "Last Edited Time"
+          },
+          {
+            "name": "created_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Created by"
+          },
+          {
+            "name": "last_edited_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Last Edited by"
+          },
+          {
+            "name": "icon",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "emoji",
+                "type": "text",
+                "label": "Emoji"
+              }
+            ],
+            "type": "collection",
+            "label": "Icon"
+          },
+          {
+            "name": "cover",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "external",
+                "spec": [
+                  {
+                    "name": "url",
+                    "type": "text",
+                    "label": "URL"
+                  }
+                ],
+                "type": "collection",
+                "label": "External"
+              }
+            ],
+            "type": "collection",
+            "label": "Cover"
+          },
+          {
+            "name": "url",
+            "type": "text",
+            "label": "URL"
+          },
+          {
+            "name": "parent",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "workspace",
+                "type": "boolean",
+                "label": "Workspace"
+              },
+              {
+                "name": "page_id",
+                "type": "text",
+                "label": "Page ID"
+              },
+              {
+                "name": "database_id",
+                "type": "text",
+                "label": "Database ID"
+              },
+              {
+                "name": "data_source_id",
+                "type": "text",
+                "label": "Data Source ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Parent"
+          },
+          {
+            "name": "properties",
+            "spec": {
+              "spec": [
+                {
+                  "name": "id",
+                  "type": "text",
+                  "label": "ID"
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "label": "Type"
+                },
+                {
+                  "name": "people",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                      },
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "avatar_url",
+                        "type": "text",
+                        "label": "Avatar Url"
+                      },
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "person",
+                        "spec": [
+                          {
+                            "name": "email",
+                            "type": "text",
+                            "label": "Email"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Person"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "People"
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "label": "URL"
+                },
+                {
+                  "name": "text",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Text"
+                },
+                {
+                  "name": "select",
+                  "spec": [
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "color",
+                      "type": "text",
+                      "label": "Color"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Select"
+                },
+                {
+                  "name": "email",
+                  "type": "text",
+                  "label": "Email"
+                },
+                {
+                  "name": "phone_number",
+                  "type": "text",
+                  "label": "Phone Number"
+                },
+                {
+                  "name": "multi_select",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Multi Select"
+                },
+                {
+                  "name": "date",
+                  "spec": [
+                    {
+                      "name": "start",
+                      "type": "text",
+                      "label": "Start"
+                    },
+                    {
+                      "name": "end",
+                      "type": "text",
+                      "label": "End"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Date"
+                },
+                {
+                  "name": "checkbox",
+                  "type": "boolean",
+                  "label": "Checkbox"
+                },
+                {
+                  "name": "number",
+                  "type": "number",
+                  "label": "Number"
+                },
+                {
+                  "name": "files",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Files"
+                },
+                {
+                  "name": "title",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Title"
+                },
+                {
+                  "name": "last_edited_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Last Edited Time"
+                },
+                {
+                  "name": "created_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Created Time"
+                },
+                {
+                  "name": "last_edited_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Last Edited By"
+                },
+                {
+                  "name": "created_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Created By"
+                },
+                {
+                  "name": "formula",
+                  "spec": [
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "string",
+                      "type": "text",
+                      "label": "String"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Formula"
+                },
+                {
+                  "name": "relation",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Relation"
+                },
+                {
+                  "name": "label",
+                  "type": "text",
+                  "label": "Label"
+                }
+              ],
+              "type": "collection"
+            },
+            "type": "array",
+            "label": "Properties"
+          },
+          {
+            "name": "public_url",
+            "type": "text",
+            "label": "Public URL"
+          },
+          {
+            "name": "archived",
+            "type": "boolean",
+            "label": "Archived"
+          },
+          {
+            "name": "in_trash",
+            "type": "boolean",
+            "label": "In Trash"
+          },
+          {
+            "name": "properties_value",
+            "spec": [
+              {
+                "name": "Trigger Automation Template",
+                "type": "boolean",
+                "label": "Trigger Automation Template"
+              },
+              {
+                "name": "Client Invited",
+                "type": "boolean",
+                "label": "Client Invited"
+              },
+              {
+                "name": "Mail Accès Client",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Mail Accès Client"
+              },
+              {
+                "name": "Cover Image",
+                "spec": [
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "file",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      },
+                      {
+                        "name": "expiry_time",
+                        "type": "date",
+                        "label": "Expiry Time"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "File"
+                  },
+                  {
+                    "name": "external",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "External"
+                  }
+                ],
+                "type": "array",
+                "label": "Cover Image"
+              },
+              {
+                "name": "Client Portal Hub",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  }
+                ],
+                "type": "array",
+                "label": "Client Portal Hub"
+              },
+              {
+                "name": "Nom Société",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Nom Société"
+              },
+              {
+                "name": "Created time",
+                "type": "date",
+                "label": "Created time"
+              },
+              {
+                "name": "Lien Contrat ",
+                "type": "text",
+                "label": "Lien Contrat "
+              },
+              {
+                "name": "Status",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Status"
+              },
+              {
+                "name": "email client",
+                "type": "text",
+                "label": "email client"
+              },
+              {
+                "name": "Contrat Signé ",
+                "type": "boolean",
+                "label": "Contrat Signé "
+              },
+              {
+                "name": "Espace Client ",
+                "type": "text",
+                "label": "Espace Client "
+              },
+              {
+                "name": "Name",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Name"
+              }
+            ],
+            "type": "collection",
+            "label": "Properties Value"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:notion2,notion3",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_NOTION}}"
+      }
+    },
+    {
+      "id": 78,
+      "mapper": {
+        "text": "Nouveau Contrat Généré . \n\nClient : {{3.nom_societe}}\n\nEspace Notion : \n{{79.public_url}}\n\nContrat PDF : {{4.exportLinks.`application/pdf`}}",
+        "parse": false,
+        "mrkdwn": true,
+        "channel": "nouveau-contrats-genesis",
+        "channelWType": "manualy"
+      },
+      "module": "slack:CreateMessage",
+      "version": 4,
+      "metadata": {
+        "expect": [
+          {
+            "name": "channelWType",
+            "type": "select",
+            "label": "Enter a channel ID or name",
+            "required": true,
+            "validate": {
+              "enum": [
+                "manualy",
+                "list"
+              ]
+            }
+          },
+          {
+            "name": "text",
+            "type": "text",
+            "label": "Text"
+          },
+          {
+            "name": "blocks",
+            "type": "text",
+            "label": "Blocks"
+          },
+          {
+            "name": "thread_ts",
+            "type": "text",
+            "label": "Thread message ID (time stamp)"
+          },
+          {
+            "name": "reply_broadcast",
+            "type": "boolean",
+            "label": "Reply broadcast"
+          },
+          {
+            "name": "link_names",
+            "type": "boolean",
+            "label": "Link names"
+          },
+          {
+            "name": "parse",
+            "type": "boolean",
+            "label": "Parse message text"
+          },
+          {
+            "name": "mrkdwn",
+            "type": "boolean",
+            "label": "Use markdown"
+          },
+          {
+            "name": "unfurl_links",
+            "type": "boolean",
+            "label": "Unfurl primarily text-based content"
+          },
+          {
+            "name": "unfurl_media",
+            "type": "boolean",
+            "label": "Unfurl media content"
+          },
+          {
+            "name": "icon_emoji",
+            "type": "text",
+            "label": "Icon emoji"
+          },
+          {
+            "name": "icon_url",
+            "type": "url",
+            "label": "Icon url"
+          },
+          {
+            "name": "username",
+            "type": "text",
+            "label": "User name"
+          },
+          {
+            "name": "channel",
+            "type": "text",
+            "label": "Channel ID or name",
+            "required": true
+          }
+        ],
+        "restore": {
+          "expect": {
+            "parse": {
+              "mode": "chose"
+            },
+            "mrkdwn": {
+              "mode": "chose"
+            },
+            "link_names": {
+              "mode": "chose"
+            },
+            "channelWType": {
+              "label": "Enter manually"
+            },
+            "unfurl_links": {
+              "mode": "chose"
+            },
+            "unfurl_media": {
+              "mode": "chose"
+            },
+            "reply_broadcast": {
+              "mode": "chose"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "slack3"
+              },
+              "label": "Bot Slack Genesis (titan-2i72143.slack.com - make)"
+            }
+          }
+        },
+        "designer": {
+          "x": 2400,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:slack2,slack3",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_SLACK}}"
+      }
+    }
+  ],
+  "name": "A1 : STRIPE + NO SIGNATURE",
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "designer": {
+      "orphans": [],
+      "samples": {
+        "1": {
+          "fields": {
+            "zip": null,
+            "city": null,
+            "name": null,
+            "email": null,
+            "phone": null,
+            "address": null,
+            "company": null,
+            "session_id": "cs_test_a13yGDKqElzhqPqNoaqRK1rOXILqrsh3LaNoaX9UC23QLxi3lamR6SJWwo",
+            "Numéro TVA": "FR712626262626",
+            "Numéro SIRET": "6786876876876",
+            "Email Professionel": "lecot.gabriel@gmail.com",
+            "Nom De La Société ": "PAPELERO LTD "
+          },
+          "formId": "LZ0xdG",
+          "eventId": "d18d03ef-2b95-4886-b20b-8a992683e89f",
+          "formName": "Informations Complémentaires  - Paiement One Shot ",
+          "createdAt": "2026-03-27T17:31:50.000Z",
+          "fieldsById": {
+            "question_7d6WZ0": "FR712626262626",
+            "question_PAV5MQ": "lecot.gabriel@gmail.com",
+            "question_qb0dy9": "PAPELERO LTD ",
+            "question_rlzANM": "6786876876876",
+            "question_QAPDGG_18011593-ab3e-4817-ae27-276cd2438ea6": null,
+            "question_QAPDGG_24453408-cd73-4848-8c75-b12f6e482280": null,
+            "question_QAPDGG_5202cc2a-a24d-4f7b-82a3-b0aff7c68830": null,
+            "question_QAPDGG_74388eaa-5fd2-4bd5-b122-33e8be8762c0": null,
+            "question_QAPDGG_94fc52dd-8d7e-443a-bb2c-890b28571cf8": null,
+            "question_QAPDGG_a1523dd4-f1a3-417c-a34d-66f2fb5ddf89": null,
+            "question_QAPDGG_d920a68c-907c-4c58-8403-46e1efea1971": "cs_test_a13yGDKqElzhqPqNoaqRK1rOXILqrsh3LaNoaX9UC23QLxi3lamR6SJWwo",
+            "question_QAPDGG_f96857e4-b5f9-428c-99f4-1ba8857a1e13": null
+          },
+          "responseId": "X5xQrPP",
+          "respondentId": "6GpG8B",
+          "submissionId": "X5xQrPP"
+        },
+        "3": {
+          "nom": "Lecot",
+          "tva": "FR712626262626",
+          "Siret": "6786876876876",
+          "email": "lcgabpoker@gmail.com",
+          "ville": "Épinay-sur-Seine",
+          "prenom": "Gabriel",
+          "adresse": "3 Rue d'Ormesson",
+          "montant": null,
+          "telephone": "+33604500940",
+          "nom_client": null,
+          "code_postal": "93800",
+          "nom_societe": "GOLDMAN SEX",
+          "date_contrat": "27/03/2026"
+        },
+        "4": {
+          "id": "1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7ZbyV9w2URk",
+          "kind": "drive#file",
+          "name": "Contrat Genesis - Installation De Système D'Onboarding",
+          "size": "25584",
+          "owners": [
+            {
+              "me": true,
+              "kind": "drive#user",
+              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+              "displayName": "gabriel lecot",
+              "emailAddress": "lecot.gabriel@gmail.com",
+              "permissionId": "02512538461943713916"
+            }
+          ],
+          "shared": false,
+          "spaces": [
+            "drive"
+          ],
+          "parents": [
+            "1CYtskAt5_D7vvbIPwxxL4HUoJNWgtXbY"
+          ],
+          "starred": false,
+          "trashed": false,
+          "version": "4",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.document",
+          "mimeType": "application/vnd.google-apps.document",
+          "ownedByMe": true,
+          "viewedByMe": true,
+          "createdTime": "2026-03-27T17:31:51.837Z",
+          "exportLinks": {
+            "text/html": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "text/plain": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "text/markdown": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/pdf": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/rtf": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "text/x-markdown": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/epub+zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/vnd.oasis.opendocument.text": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7...",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "https://docs.google.com/feeds/download/documents/export/Export?id=1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7..."
+          },
+          "permissions": [
+            {
+              "id": "02512538461943713916",
+              "kind": "drive#permission",
+              "role": "owner",
+              "type": "user",
+              "deleted": false,
+              "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+              "displayName": "gabriel lecot",
+              "emailAddress": "lecot.gabriel@gmail.com",
+              "pendingOwner": false,
+              "permissionDetails": [
+                {
+                  "role": "owner",
+                  "inherited": true,
+                  "permissionType": "file"
+                }
+              ]
+            }
+          ],
+          "webViewLink": "https://docs.google.com/document/d/1qLimj1hICy8RWZLJFhUKflNqb8IQaa-K7ZbyV9w2URk/edit?usp=drivesdk",
+          "capabilities": {
+            "canCopy": true,
+            "canEdit": true,
+            "canShare": true,
+            "canTrash": true,
+            "canDelete": true,
+            "canRename": true,
+            "canComment": true,
+            "canUntrash": true,
+            "canDownload": true,
+            "canReadLabels": false,
+            "canAddChildren": false,
+            "canListChildren": false,
+            "canModifyLabels": false,
+            "canModifyContent": true,
+            "canReadRevisions": true,
+            "canRemoveChildren": false,
+            "canAcceptOwnership": false,
+            "canAddMyDriveParent": false,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRemoveMyDriveParent": true,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveChildrenWithinDrive": false,
+            "canModifyContentRestriction": true,
+            "canRemoveContentRestriction": false,
+            "canEnableInheritedPermissions": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canDisableInheritedPermissions": false,
+            "canChangeItemDownloadRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canChangeCopyRequiresWriterPermission": true
+          },
+          "hasThumbnail": true,
+          "modifiedByMe": true,
+          "modifiedTime": "2026-03-27T17:31:51.837Z",
+          "permissionIds": [
+            "02512538461943713916"
+          ],
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBMS487vOb9Me0tEWLGz2aRXDTgY44f15rMNiSXT1tXIw1UX...",
+          "quotaBytesUsed": "25584",
+          "viewedByMeTime": "2026-03-27T15:34:19.142Z",
+          "isAppAuthorized": true,
+          "writersCanShare": true,
+          "modifiedByMeTime": "2026-03-27T17:31:51.837Z",
+          "thumbnailVersion": "1",
+          "explicitlyTrashed": false,
+          "lastModifyingUser": {
+            "me": true,
+            "kind": "drive#user",
+            "photoLink": "https://lh3.googleusercontent.com/a/ACg8ocKVQ4Upf8V0ctK8WIiKPwJyo_NjJbHRRsvfAlL29lGppihwQReP5Q=s64",
+            "displayName": "gabriel lecot",
+            "emailAddress": "lecot.gabriel@gmail.com",
+            "permissionId": "02512538461943713916"
+          },
+          "linkShareMetadata": {
+            "securityUpdateEnabled": true,
+            "securityUpdateEligible": false
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "inheritedPermissionsDisabled": false
+        },
+        "23": {
+          "id": "33045ca2-a462-81f9-8d55-eb160bdd74ad",
+          "url": "https://www.notion.so/Sentinel-LTD-33045ca2a46281f98d55eb160bdd74ad",
+          "icon": null,
+          "cover": null,
+          "object": "page",
+          "parent": {
+            "type": "data_source_id",
+            "database_id": "{{NOTION_DB_CLIENT_ID}}",
+            "data_source_id": "2d145ca2-a462-816e-aa67-000bd4d5b292"
+          },
+          "archived": false,
+          "in_trash": false,
+          "is_locked": false,
+          "created_by": {
+            "id": "7977a22e-b57d-4d6f-96b2-7e7823a9a963",
+            "object": "user"
+          },
+          "properties": [
+            {
+              "id": "title",
+              "url": "https://docs.google.com/feeds/download/documents/export/Export?id=1zyIiBdRiG_BrmXsK1GG3Z2gwOSdYGFehy...",
+              "type": "title",
+              "email": "lc.gab.pro@gmail.com",
+              "files": [],
+              "label": "Name",
+              "title": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Sentinel LTD"
+                  },
+                  "type": "text",
+                  "plain_text": "Sentinel LTD",
+                  "annotations": {
+                    "bold": false,
+                    "code": false,
+                    "color": "default",
+                    "italic": false,
+                    "underline": false,
+                    "strikethrough": false
+                  }
+                }
+              ],
+              "status": {
+                "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+                "name": "Not started",
+                "color": "default"
+              },
+              "formula": {
+                "type": "string",
+                "string": "Espace Client -  Sentinel LTD"
+              },
+              "checkbox": null,
+              "has_more": null,
+              "relation": [],
+              "rich_text": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Sentinel LTD"
+                  },
+                  "type": "text",
+                  "plain_text": "Sentinel LTD",
+                  "annotations": {
+                    "bold": null,
+                    "code": null,
+                    "color": "default",
+                    "italic": null,
+                    "underline": null,
+                    "strikethrough": null
+                  }
+                }
+              ],
+              "created_time": {}
+            }
+          ],
+          "public_url": null,
+          "request_id": "1cbe528c-9211-4b77-afb6-2a033a9b2c32",
+          "is_archived": false,
+          "created_time": "2026-03-27T16:18:00.000Z",
+          "last_edited_by": {
+            "id": "7977a22e-b57d-4d6f-96b2-7e7823a9a963",
+            "object": "user"
+          },
+          "last_edited_time": "2026-03-27T16:18:00.000Z",
+          "properties_value": {
+            "Name": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Sentinel LTD"
+                },
+                "type": "text",
+                "plain_text": "Sentinel LTD",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "date": "2026-03-27T16:18:00.000Z",
+            "Ville": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Épinay-sur-Seine"
+                },
+                "type": "text",
+                "plain_text": "Épinay-sur-Seine",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Status": {
+              "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+              "name": "Not started",
+              "color": "default"
+            },
+            "Adresse": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "3 Rue d'Ormesson"
+                },
+                "type": "text",
+                "plain_text": "3 Rue d'Ormesson",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Code Postal": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "93800"
+                },
+                "type": "text",
+                "plain_text": "93800",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Cover Image": [],
+            "Client Email": "lc.gab.pro@gmail.com",
+            "Nom Calculé": {
+              "type": "string",
+              "string": "Espace Client -  Sentinel LTD"
+            },
+            "Client Space ": [],
+            "Nom Société": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Sentinel LTD"
+                },
+                "type": "text",
+                "plain_text": "Sentinel LTD",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Client Invited": false,
+            "Contract Signed": false,
+            "Lien Contrat Client ": "https://docs.google.com/feeds/download/documents/export/Export?id=1zyIiBdRiG_BrmXsK1GG3Z2gwOSdYGFehy..."
+          }
+        },
+        "40": {
+          "data": {
+            "id": "cs_test_a13yGDKqElzhqPqNoaqRK1rOXILqrsh3LaNoaX9UC23QLxi3lamR6SJWwo",
+            "url": null,
+            "mode": "payment",
+            "locale": "auto",
+            "object": "checkout.session",
+            "status": "complete",
+            "consent": null,
+            "created": 1774629062,
+            "invoice": null,
+            "ui_mode": "hosted",
+            "currency": "eur",
+            "customer": null,
+            "livemode": false,
+            "metadata": {},
+            "shipping": null,
+            "discounts": [],
+            "cancel_url": "https://stripe.com",
+            "expires_at": 1774715462,
+            "custom_text": {
+              "submit": null,
+              "after_submit": null,
+              "shipping_address": null,
+              "terms_of_service_acceptance": null
+            },
+            "permissions": null,
+            "submit_type": "auto",
+            "success_url": "https://tally.so/r/LZ0xdG?session_id={CHECKOUT_SESSION_ID}",
+            "amount_total": 51,
+            "payment_link": "plink_1TD1NxEA5PO42SVPKUcebkf9",
+            "setup_intent": null,
+            "subscription": null,
+            "automatic_tax": {
+              "status": null,
+              "enabled": false,
+              "provider": null,
+              "liability": null
+            },
+            "client_secret": null,
+            "custom_fields": [
+              {
+                "key": "prnom",
+                "text": {
+                  "value": "Lecot",
+                  "default_value": null,
+                  "maximum_length": null,
+                  "minimum_length": null
+                },
+                "type": "text",
+                "label": {
+                  "type": "custom",
+                  "custom": "Nom"
+                },
+                "optional": null
+              }
+            ],
+            "shipping_rate": null,
+            "total_details": {
+              "amount_tax": 0,
+              "amount_discount": 0,
+              "amount_shipping": 0
+            },
+            "customer_email": null,
+            "origin_context": null,
+            "payment_intent": "pi_3TFdIiEA5PO42SVP0o79ZrcT",
+            "payment_status": "paid",
+            "recovered_from": null,
+            "wallet_options": null,
+            "amount_subtotal": 51,
+            "name_collection": {
+              "business": {
+                "enabled": true,
+                "optional": true
+              }
+            },
+            "adaptive_pricing": {
+              "enabled": true
+            },
+            "after_expiration": null,
+            "customer_account": null,
+            "customer_details": {
+              "name": "GOLDMAN SEX",
+              "email": "lcgabpoker@gmail.com",
+              "phone": "+33604500940",
+              "address": {
+                "city": "Épinay-sur-Seine",
+                "line1": "3 Rue d'Ormesson",
+                "line2": null,
+                "state": null,
+                "country": "FR",
+                "postal_code": "93800"
+              },
+              "tax_ids": [],
+              "tax_exempt": "none",
+              "business_name": "GOLDMAN SEX",
+              "individual_name": null
+            },
+            "invoice_creation": {
+              "enabled": false,
+              "invoice_data": {
+                "footer": null,
+                "issuer": null,
+                "metadata": {},
+                "description": null,
+                "custom_fields": null,
+                "account_tax_ids": null,
+                "rendering_options": null
+              }
+            },
+            "shipping_options": [],
+            "customer_creation": "if_required",
+            "consent_collection": {
+              "promotions": "none",
+              "terms_of_service": "none",
+              "payment_method_reuse_agreement": null
+            },
+            "client_reference_id": null,
+            "currency_conversion": null,
+            "payment_method_types": [
+              "card"
+            ],
+            "allow_promotion_codes": false,
+            "collected_information": {
+              "business_name": "GOLDMAN SEX",
+              "individual_name": null,
+              "shipping_details": null
+            },
+            "integration_identifier": null,
+            "payment_method_options": {
+              "card": {
+                "request_three_d_secure": "automatic"
+              }
+            },
+            "phone_number_collection": {
+              "enabled": true
+            },
+            "payment_method_collection": "always",
+            "billing_address_collection": "required",
+            "shipping_address_collection": null,
+            "saved_payment_method_options": null,
+            "payment_method_configuration_details": {
+              "id": "pmc_1N2IdgEA5PO42SVPwM6e7afw",
+              "parent": null
+            }
+          },
+          "headers": {
+            "date": "Fri, 27 Mar 2026 17:31:51 GMT",
+            "vary": "Origin",
+            "x-wc": "ABGHIJ",
+            "server": "nginx",
+            "connection": "keep-alive",
+            "request-id": "req_NNuc93Fn7ZfVAH",
+            "content-type": "application/json",
+            "cache-control": "no-cache, no-store",
+            "content-length": "3823",
+            "stripe-version": "2020-08-27",
+            "access-control-max-age": "300",
+            "content-security-policy": "base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none'; img-src 'self'; scr...",
+            "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+            "access-control-allow-origin": "*",
+            "access-control-allow-methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
+            "access-control-expose-headers": "Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required, X-Stripe-Pr...",
+            "access-control-allow-credentials": "true",
+            "x-stripe-priority-routing-enabled": "true",
+            "x-stripe-routing-context-priority-tier": "api-testmode"
+          },
+          "statusCode": 200
+        },
+        "43": {
+          "data": "IMTBuffer(135531, binary, af1f70f43819c98be67793942f9a5953b120ab9f): 255044462d312e340a25d3ebe9e10a3...",
+          "filename": "Contrat Genesis - Installation De Système D'Onboarding.pdf"
+        },
+        "76": {
+          "nom_sign": "Lecot",
+          "file_name": null,
+          "email_sign": "lcgabpoker@gmail.com",
+          "prenom_sign": "Gabriel",
+          "nom_affichage": "GOLDMAN SEX",
+          "titre_contrat": "Contrat Genesis - Installation De Système D'Onboarding",
+          "nom_complet_sign": null
+        },
+        "78": {
+          "ts": "1774628336.409479",
+          "channel": "C0APBPTVD1Q",
+          "message": {
+            "ts": "1774628336.409479",
+            "team": "T0839JA6ED7",
+            "text": "Nouveau Contrat Généré . \n\nClient : Sentinel LTD\n\nEspace Notion : \n<https://holistic-maxilla-d6b.not...",
+            "type": "message",
+            "user": "U08N4NKJWAV",
+            "app_id": "A07FPU6DA9E",
+            "blocks": [
+              {
+                "type": "rich_text",
+                "block_id": "y8z6",
+                "elements": [
+                  {
+                    "type": "rich_text_section",
+                    "elements": [
+                      {
+                        "url": "https://docs.google.com/feeds/download/documents/export/Export?id=1zyIiBdRiG_BrmXsK1GG3Z2gwOSdYGFehy...",
+                        "text": "https://docs.google.com/feeds/download/documents/export/Export?id=1zyIiBdRiG_BrmXsK1GG3Z2gwOSdYGFehy...",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "bot_id": "B08N4NKJL3T",
+            "bot_profile": {
+              "id": "B08N4NKJL3T",
+              "name": "Make",
+              "icons": {
+                "image_36": "https://avatars.slack-edge.com/2024-08-01/7524075689713_076a674b29aa490f684e_36.png",
+                "image_48": "https://avatars.slack-edge.com/2024-08-01/7524075689713_076a674b29aa490f684e_48.png",
+                "image_72": "https://avatars.slack-edge.com/2024-08-01/7524075689713_076a674b29aa490f684e_72.png"
+              },
+              "app_id": "A07FPU6DA9E",
+              "deleted": false,
+              "team_id": "T0839JA6ED7",
+              "updated": "2025-04-11T13:31:49.000Z",
+              "user_id": "U08N4NKJWAV"
+            }
+          }
+        },
+        "79": {
+          "id": "33045ca2-a462-810e-baf5-fa9a281d6bdf",
+          "url": "https://www.notion.so/Espace-Client-Sentinel-LTD-33045ca2a462810ebaf5fa9a281d6bdf",
+          "icon": {
+            "icon": {
+              "name": "triangle",
+              "color": "orange"
+            },
+            "type": "icon"
+          },
+          "cover": null,
+          "object": "page",
+          "parent": {
+            "type": "data_source_id",
+            "database_id": "2d145ca2-a462-8184-9430-d9de2452f4e1",
+            "data_source_id": "{{NOTION_DB_SEARCH_ID}}"
+          },
+          "archived": false,
+          "in_trash": false,
+          "is_locked": false,
+          "created_by": {
+            "id": "00000000-0000-0000-0000-000000000003",
+            "object": "user"
+          },
+          "properties": [
+            {
+              "id": "title",
+              "url": null,
+              "type": "title",
+              "email": "lc.gab.pro@gmail.com ",
+              "files": [],
+              "label": "Name",
+              "title": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Espace Client -  Sentinel LTD "
+                  },
+                  "type": "text",
+                  "plain_text": "Espace Client -  Sentinel LTD ",
+                  "annotations": {
+                    "bold": false,
+                    "code": false,
+                    "color": "default",
+                    "italic": false,
+                    "underline": false,
+                    "strikethrough": false
+                  }
+                }
+              ],
+              "select": null,
+              "status": {
+                "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+                "name": "Not started",
+                "color": "default"
+              },
+              "checkbox": null,
+              "has_more": null,
+              "relation": [
+                {
+                  "id": "33045ca2-a462-8181-a898-c9e0df250f1f"
+                }
+              ],
+              "rich_text": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": " "
+                  },
+                  "type": "text",
+                  "plain_text": " ",
+                  "annotations": {
+                    "bold": null,
+                    "code": null,
+                    "color": "default",
+                    "italic": null,
+                    "underline": null,
+                    "strikethrough": null
+                  }
+                }
+              ],
+              "created_time": {}
+            }
+          ],
+          "public_url": "https://holistic-maxilla-d6b.notion.site/Espace-Client-Sentinel-LTD-33045ca2a462810ebaf5fa9a281d6bdf",
+          "is_archived": false,
+          "__IMTINDEX__": 1,
+          "created_time": "2026-03-27T16:11:00.000Z",
+          "__IMTLENGTH__": 3,
+          "last_edited_by": {
+            "id": "00000000-0000-0000-0000-000000000003",
+            "object": "user"
+          },
+          "last_edited_time": "2026-03-27T16:11:00.000Z",
+          "properties_value": {
+            "Name": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Espace Client -  Sentinel LTD "
+                },
+                "type": "text",
+                "plain_text": "Espace Client -  Sentinel LTD ",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Status": {
+              "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+              "name": "Not started",
+              "color": "default"
+            },
+            "Projets ": [],
+            "Cover Image": [],
+            "Created time": "2026-03-27T16:11:00.000Z",
+            "email client": "lc.gab.pro@gmail.com ",
+            "Lien Contrat ": null,
+            "Nom Société": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": " "
+                },
+                "type": "text",
+                "plain_text": " ",
+                "annotations": {
+                  "bold": null,
+                  "code": null,
+                  "color": "default",
+                  "italic": null,
+                  "underline": null,
+                  "strikethrough": null
+                }
+              }
+            ],
+            "Client Invited": false,
+            "Espace Client ": null,
+            "Contrat Signé ": false,
+            "Client Portal Hub": [
+              {
+                "id": "33045ca2-a462-8181-a898-c9e0df250f1f"
+              }
+            ],
+            "Mail Accès Client": null,
+            "Trigger Automation Template": false
+          }
+        }
+      }
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  },
+  "scheduling": {
+    "type": "immediately",
+    "maximum_runs_per_minute": null
+  },
+  "interface": {
+    "input": [],
+    "output": []
+  }
+}

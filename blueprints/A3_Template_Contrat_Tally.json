@@ -1,0 +1,557 @@
+{
+  "flow": [
+    {
+      "id": 1,
+      "mapper": {},
+      "module": "tally:watchNewResponse",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTHOOK__": {
+              "data": {
+                "editable": "false"
+              },
+              "label": "A3 — Tally Template Contrat"
+            }
+          }
+        },
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "interface": [
+          {
+            "name": "eventId",
+            "type": "text",
+            "label": "Event ID"
+          },
+          {
+            "name": "responseId",
+            "type": "text",
+            "label": "Response ID"
+          },
+          {
+            "name": "submissionId",
+            "type": "text",
+            "label": "Submission ID"
+          },
+          {
+            "name": "respondentId",
+            "type": "text",
+            "label": "Respondent ID"
+          },
+          {
+            "name": "formId",
+            "type": "text",
+            "label": "Form ID"
+          },
+          {
+            "name": "formName",
+            "type": "text",
+            "label": "Form Name"
+          },
+          {
+            "name": "createdAt",
+            "type": "date",
+            "label": "Created at"
+          },
+          {
+            "name": "fields",
+            "spec": [
+              {
+                "name": "template_id",
+                "type": "text"
+              },
+              {
+                "name": "Nom du signataire",
+                "type": "text"
+              },
+              {
+                "name": "Nom De La Société ",
+                "type": "text"
+              },
+              {
+                "name": "Adresse",
+                "type": "text"
+              },
+              {
+                "name": "Ville",
+                "type": "text"
+              },
+              {
+                "name": "Code Postal",
+                "type": "text"
+              },
+              {
+                "name": "SIRET",
+                "type": "text"
+              },
+              {
+                "name": "Numéro de téléphone",
+                "type": "text"
+              },
+              {
+                "name": "Adresse e-mail",
+                "type": "email"
+              },
+              {
+                "name": "Quel est le nom commercial de cette offre ?",
+                "type": "text"
+              },
+              {
+                "name": "Quel est le type de votre prestation ?",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array"
+              },
+              {
+                "name": "Type De Prestation ( libre )",
+                "type": "text"
+              },
+              {
+                "name": "Décrivez en 2 à 3 phrases ce que vous livrez à votre client",
+                "type": "text"
+              },
+              {
+                "name": "Listez les livrables concrets de cette prestation\n(texte long — un livrable par ligne)",
+                "type": "text"
+              },
+              {
+                "name": "Quelle est la durée de cette mission ?",
+                "type": "text"
+              },
+              {
+                "name": "Quel est le montant HT de cette offre ?",
+                "type": "number"
+              },
+              {
+                "name": "Quelle est la modalité de paiement ?",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array"
+              },
+              {
+                "name": "Décrivez vos jalons de paiement :",
+                "type": "text"
+              },
+              {
+                "name": "Proposez-vous une garantie à votre client ?",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array"
+              },
+              {
+                "name": "Décrivez votre Garantie : ",
+                "type": "text"
+              },
+              {
+                "name": "Avez-vous des clauses particulières à inclure dans votre contrat ?",
+                "type": "text"
+              },
+              {
+                "name": "Avez-vous un contrat existant à nous transmettre ?",
+                "spec": {
+                  "type": "text"
+                },
+                "type": "array"
+              },
+              {
+                "name": "Votre Modèle De Contrat :",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "File ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "File Name"
+                  },
+                  {
+                    "name": "url",
+                    "type": "url",
+                    "label": "File URL"
+                  },
+                  {
+                    "name": "mimeType",
+                    "type": "text",
+                    "label": "File Mime Type"
+                  },
+                  {
+                    "name": "size",
+                    "type": "uinteger",
+                    "label": "File Size"
+                  }
+                ],
+                "type": "array"
+              }
+            ],
+            "type": "collection",
+            "label": "Fields"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTHOOK__",
+            "type": "hook:tally",
+            "label": "Webhook",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTHOOK__": "{{HOOK_TALLY_A3}}"
+      }
+    },
+    {
+      "id": 2,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "template_id",
+            "value": "{{1.fields.template_id}}"
+          },
+          {
+            "name": "nom_offre",
+            "value": "{{1.fields.`Quel est le nom commercial de cette offre ?`}}"
+          },
+          {
+            "name": "type_prestation",
+            "value": "{{ifempty(first(1.fields.`Quel est le type de votre prestation ?`); 1.fields.`Type De Prestation ( libre `)}}"
+          },
+          {
+            "name": "description",
+            "value": "{{1.fields.`Décrivez en 2 à 3 phrases ce que vous livrez à votre client`}}"
+          },
+          {
+            "name": "livrables",
+            "value": "{{1.fields.`Listez les livrables concrets de cette prestation\n(texte long — un livrable par ligne)`}}"
+          },
+          {
+            "name": "duree",
+            "value": "{{1.fields.`Quelle est la durée de cette mission ?`}}"
+          },
+          {
+            "name": "montant",
+            "value": "{{1.fields.`Quel est le montant HT de cette offre ?`}}"
+          },
+          {
+            "name": "modalite",
+            "value": "{{first(1.fields.`Quelle est la modalité de paiement ?`)}}"
+          },
+          {
+            "name": "jalons",
+            "value": "{{ifempty(1.fields.`Décrivez vos jalons de paiement :`; \"Non applicable\")}}"
+          },
+          {
+            "name": "garantie",
+            "value": "{{ifempty(1.fields.`Décrivez votre Garantie : `; \"Aucune garantie spécifique\")}}"
+          },
+          {
+            "name": "clauses",
+            "value": "{{ifempty(1.fields.`Avez-vous des clauses particulières à inclure dans votre contrat ?`; \"Aucune clause spécifique\")}}"
+          },
+          {
+            "name": "nom_signataire",
+            "value": "{{1.fields.`Nom du signataire`}}"
+          },
+          {
+            "name": "nom_societe",
+            "value": "{{1.fields.`Nom De La Société `}}"
+          },
+          {
+            "name": "email",
+            "value": "{{1.fields.`Adresse e-mail`}}"
+          },
+          {
+            "name": "telephone",
+            "value": "{{1.fields.`Numéro de téléphone`}}"
+          },
+          {
+            "name": "adresse",
+            "value": "{{1.fields.Adresse}}"
+          },
+          {
+            "name": "ville",
+            "value": "{{1.fields.Ville}}"
+          },
+          {
+            "name": "code_postal",
+            "value": "{{1.fields.`Code Postal`}}"
+          },
+          {
+            "name": "Siret",
+            "value": "{{1.fields.SIRET}}"
+          },
+          {
+            "name": "date_contrat",
+            "value": "{{formatDate(now; \"DD/MM/YYYY\")}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0,
+          "name": "Variables — Champs Tally"
+        }
+      },
+      "parameters": {}
+    },
+    {
+      "id": 9,
+      "mapper": {
+        "id": "{{CLAUDE_SKILL_ID}}"
+      },
+      "module": "anthropic-claude:getSkill",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "expect": {
+            "id": {
+              "mode": "chose",
+              "label": "legal-contracts-fr"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "anthropic-claude"
+              },
+              "label": "Connexion Anthropic 1 "
+            }
+          }
+        },
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:anthropic-claude",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_ANTHROPIC}}"
+      }
+    },
+    {
+      "id": 8,
+      "mapper": {
+        "url": "/v1/messages",
+        "body": "{\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 1400,\n  \"container\": {\n    \"skills\": [\n      {\n        \"type\": \"custom\",\n        \"skill_id\": \"{{9.id}}\",\n        \"version\": \"{{9.latest_version}}\"\n      }\n    ]\n  },\n  \"tools\": [\n    {\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }\n  ],\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"prompt juridique\"\n    }\n  ]\n}",
+        "method": "POST",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "anthropic-beta",
+            "value": "code-execution-2025-08-25,skills-2025-10-02,files-api-2025-04-14"
+          }
+        ]
+      },
+      "module": "anthropic-claude:makeAnApiCall",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "anthropic-claude"
+              },
+              "label": "Connexion Anthropic 1 "
+            }
+          }
+        },
+        "designer": {
+          "x": 900,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:anthropic-claude",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_ANTHROPIC}}"
+      }
+    },
+    {
+      "id": 4,
+      "mapper": {
+        "scope": "roundtrip",
+        "variables": [
+          {
+            "name": "description_livrables",
+            "value": "{{parseJSON(get(8.data.content; 1) + .text)}}{{.description_livrables}}"
+          },
+          {
+            "name": "modalite_paiement",
+            "value": "{{parseJSON(get(8.data.content; 1) + .text)}}{{.modalite_paiement}}"
+          }
+        ]
+      },
+      "module": "util:SetVariables",
+      "version": 1,
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0,
+          "name": "Parse JSON Claude"
+        }
+      },
+      "parameters": {}
+    },
+    {
+      "id": 5,
+      "mapper": {
+        "name": "Template - {{2.nom_offre}} - {{2.date_contrat}}",
+        "select": "map",
+        "document": "{{2.template_id}}",
+        "folderId": "/{{GOOGLE_DRIVE_FOLDER_ID}}",
+        "requests": [
+          {
+            "text": "nom_societe",
+            "replaceText": "{{2.nom_societe}}"
+          },
+          {
+            "text": "Siret",
+            "replaceText": "{{2.Siret}}"
+          },
+          {
+            "text": "adresse",
+            "replaceText": "{{2.adresse}}"
+          },
+          {
+            "text": "code_postal",
+            "replaceText": "{{2.code_postal}}"
+          },
+          {
+            "text": "ville",
+            "replaceText": "{{2.ville}}"
+          },
+          {
+            "text": "nom_client",
+            "replaceText": "{{2.nom_signataire}}"
+          },
+          {
+            "text": "email",
+            "replaceText": "{{2.email}}"
+          },
+          {
+            "text": "telephone",
+            "replaceText": "{{2.telephone}}"
+          },
+          {
+            "text": "montant",
+            "replaceText": "{{2.montant}}"
+          },
+          {
+            "text": "date_contrat",
+            "replaceText": "{{2.date_contrat}}"
+          },
+          {
+            "text": "date_signature",
+            "replaceText": "{{2.date_contrat}}"
+          },
+          {
+            "text": "nom_offre",
+            "replaceText": "{{2.nom_offre}}"
+          },
+          {
+            "text": "type_prestation",
+            "replaceText": "{{2.type_prestation}}"
+          },
+          {
+            "text": "duree",
+            "replaceText": "{{2.duree}}"
+          },
+          {
+            "text": "modalite",
+            "replaceText": "{{2.modalite}}"
+          },
+          {
+            "text": "description_livrables",
+            "replaceText": "{{4.description_livrables}}"
+          },
+          {
+            "text": "modalite_paiement",
+            "replaceText": "{{4.modalite_paiement}}"
+          }
+        ],
+        "destination": "drive"
+      },
+      "module": "google-docs:createADocumentFromTemplate",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google"
+              },
+              "label": "My Google connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1500,
+          "y": 0,
+          "name": "Google Docs — Create from Template"
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GOOGLE}}"
+      }
+    }
+  ],
+  "name": "A3 — Template Contrat Tally",
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  },
+  "scheduling": {
+    "type": "immediately"
+  }
+}

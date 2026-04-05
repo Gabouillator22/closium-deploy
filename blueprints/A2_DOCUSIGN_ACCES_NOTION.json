@@ -1,0 +1,2205 @@
+{
+  "flow": [
+    {
+      "id": 2,
+      "mapper": {},
+      "module": "docusign:watchDocusignConnectEvent",
+      "version": 1,
+      "metadata": {
+        "restore": {
+          "parameters": {
+            "__IMTHOOK__": {
+              "data": {
+                "editable": "false"
+              },
+              "label": "My Docusign Connect Event webhook"
+            }
+          }
+        },
+        "designer": {
+          "x": 300,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTHOOK__",
+            "type": "hook:docusign35",
+            "label": "Webhook",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTHOOK__": "{{HOOK_DOCUSIGN_A2}}"
+      }
+    },
+    {
+      "id": 14,
+      "mapper": {
+        "include": [
+          "recipients"
+        ],
+        "envelopeId": "{{2.data.envelopeId}}",
+        "select_account": "{ \"accountId\": \"{{DOCUSIGN_ACCOUNT_ID}}\", \"baseUri\": \"https://eu.docusign.net\" }"
+      },
+      "module": "docusign:GetEnvelopeStatus",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select_account",
+            "type": "select",
+            "label": "Account",
+            "required": true
+          },
+          {
+            "name": "envelopeId",
+            "type": "text",
+            "label": "Envelope ID",
+            "required": true
+          },
+          {
+            "name": "include",
+            "type": "select",
+            "label": "Include in response",
+            "multiple": true,
+            "validate": {
+              "enum": [
+                "custom_fields",
+                "documents",
+                "attachments",
+                "extensions",
+                "folders",
+                "recipients",
+                "powerform",
+                "tabs",
+                "payment_tabs"
+              ]
+            }
+          }
+        ],
+        "restore": {
+          "expect": {
+            "include": {
+              "mode": "chose"
+            },
+            "select_account": {
+              "label": "Gabriel Lecot"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "docusign"
+              },
+              "label": "My DocuSign connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "advanced": true,
+        "designer": {
+          "x": 600,
+          "y": 0
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:docusign",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_DOCUSIGN}}"
+      }
+    },
+    {
+      "id": 5,
+      "filter": null,
+      "mapper": {
+        "name": "client_email",
+        "scope": "roundtrip",
+        "value": "{{14.recipients.signers[].email}}"
+      },
+      "module": "util:SetVariable2",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "name",
+            "type": "text",
+            "label": "Variable name",
+            "required": true
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "any",
+            "label": "Variable value"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            }
+          }
+        },
+        "designer": {
+          "x": 885,
+          "y": 5
+        },
+        "interface": [
+          {
+            "name": "client_email",
+            "type": "any",
+            "label": "client_email"
+          }
+        ]
+      },
+      "parameters": {}
+    },
+    {
+      "id": 4,
+      "mapper": {
+        "limit": "10",
+        "filter": [
+          [
+            {
+              "a": "email client |&*^%$#@| email",
+              "b": "{{5.client_email}}",
+              "o": "text:equals"
+            }
+          ]
+        ],
+        "select": "data_source_item",
+        "data_source": "{{NOTION_DB_SEARCH_ID}}"
+      },
+      "module": "notion:searchObjects1",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "select",
+            "type": "select",
+            "label": "Search Objects",
+            "required": true,
+            "validate": {
+              "enum": [
+                "data_source_item",
+                "data_source",
+                "page",
+                "item",
+                "database"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "type": "uinteger",
+            "label": "Limit"
+          },
+          {
+            "name": "data_source",
+            "type": "text",
+            "label": "Data source ID",
+            "required": true
+          },
+          {
+            "name": "filter",
+            "type": "filter",
+            "label": "Filter",
+            "options": {
+              "store": [
+                {
+                  "label": "Trigger Automation Template (Checkbox)",
+                  "value": "Trigger Automation Template |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Client Invited (Checkbox)",
+                  "value": "Client Invited |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Mail Accès Client (Select)",
+                  "value": "Mail Accès Client |&*^%$#@| select"
+                },
+                {
+                  "label": "Cover Image (Files)",
+                  "value": "Cover Image |&*^%$#@| files"
+                },
+                {
+                  "label": "Client Portal Hub (Relation)",
+                  "value": "Client Portal Hub |&*^%$#@| relation"
+                },
+                {
+                  "label": "Nom Société (Rich text)",
+                  "value": "Nom Société |&*^%$#@| rich_text"
+                },
+                {
+                  "label": "Created time (Created time)",
+                  "value": "Created time |&*^%$#@| created_time"
+                },
+                {
+                  "label": "Status (Status)",
+                  "value": "Status |&*^%$#@| status"
+                },
+                {
+                  "label": "email client (Email)",
+                  "value": "email client |&*^%$#@| email"
+                },
+                {
+                  "label": "Contrat Signé  (Checkbox)",
+                  "value": "Contrat Signé  |&*^%$#@| checkbox"
+                },
+                {
+                  "label": "Espace Client  (Url)",
+                  "value": "Espace Client  |&*^%$#@| url"
+                },
+                {
+                  "label": "Name (Title)",
+                  "value": "Name |&*^%$#@| title"
+                }
+              ],
+              "operators": [
+                {
+                  "label": "Text",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "text:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "text:does_not_equal"
+                    },
+                    {
+                      "label": "Contains",
+                      "value": "text:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "text:does_not_contain"
+                    },
+                    {
+                      "label": "Starts with",
+                      "value": "text:starts_with"
+                    },
+                    {
+                      "label": "Ends with",
+                      "value": "text:ends_with"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "text:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "text:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Number",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "number:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "number:does_not_equal"
+                    },
+                    {
+                      "label": "Greater than",
+                      "value": "number:greater_than"
+                    },
+                    {
+                      "label": "Less than",
+                      "value": "number:less_than"
+                    },
+                    {
+                      "label": "Greater than or equal to",
+                      "value": "number:greater_than_or_equal_to"
+                    },
+                    {
+                      "label": "Less than or equal to",
+                      "value": "number:less_than_or_equal_to"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "number:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "number:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Date",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "date:equals"
+                    },
+                    {
+                      "label": "Before",
+                      "value": "date:before"
+                    },
+                    {
+                      "label": "After",
+                      "value": "date:after"
+                    },
+                    {
+                      "label": "On or before",
+                      "value": "date:on_or_before"
+                    },
+                    {
+                      "label": "On or after",
+                      "value": "date:on_or_after"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "date:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "date:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Checkbox",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "checkbox:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "checkbox:does_not_equal"
+                    }
+                  ]
+                },
+                {
+                  "label": "File",
+                  "options": [
+                    {
+                      "label": "Is empty",
+                      "value": "file:is_empty"
+                    },
+                    {
+                      "label": "Is not empty",
+                      "value": "file:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Select",
+                  "options": [
+                    {
+                      "label": "Equals",
+                      "value": "select:equals"
+                    },
+                    {
+                      "label": "Does not equal",
+                      "value": "select:does_not_equal"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "select:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "select:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Multi-select",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "multiselect:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "multiselect:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "multiselect:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "multiselect:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "People",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "people:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "people:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "people:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "people:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Relation",
+                  "options": [
+                    {
+                      "label": "Contains",
+                      "value": "relation:contains"
+                    },
+                    {
+                      "label": "Does not contain",
+                      "value": "relation:does_not_contain"
+                    },
+                    {
+                      "label": "Is empty (Boolean)",
+                      "value": "relation:is_empty"
+                    },
+                    {
+                      "label": "Is not empty (boolean)",
+                      "value": "relation:is_not_empty"
+                    }
+                  ]
+                },
+                {
+                  "label": "Formula",
+                  "options": [
+                    {
+                      "label": "String - Equals",
+                      "value": "formula:text-equals"
+                    },
+                    {
+                      "label": "String - Does not equal",
+                      "value": "formula:text-does_not_equal"
+                    },
+                    {
+                      "label": "String - Contains",
+                      "value": "formula:text-contains"
+                    },
+                    {
+                      "label": "String - Does not contain",
+                      "value": "formula:text-does_not_contain"
+                    },
+                    {
+                      "label": "String - Starts with",
+                      "value": "formula:text-starts_with"
+                    },
+                    {
+                      "label": "String - Ends with",
+                      "value": "formula:text-ends_with"
+                    },
+                    {
+                      "label": "String - Is empty (Boolean)",
+                      "value": "formula:text-is_empty"
+                    },
+                    {
+                      "label": "Text - Is not empty (boolean)",
+                      "value": "formula:text-is_not_empty"
+                    },
+                    {
+                      "label": "Checkbox - Equals",
+                      "value": "formula:checkbox-equals"
+                    },
+                    {
+                      "label": "Checkbox - Does not equal",
+                      "value": "formula:checkbox-does_not_equal"
+                    },
+                    {
+                      "label": "Number - Equals",
+                      "value": "formula:number-equals"
+                    },
+                    {
+                      "label": "Number - Does not equal",
+                      "value": "formula:number-does_not_equal"
+                    },
+                    {
+                      "label": "Number - Greater than",
+                      "value": "formula:number-greater_than"
+                    },
+                    {
+                      "label": "Number - Less than",
+                      "value": "formula:number-less_than"
+                    },
+                    {
+                      "label": "Number - Greater than or equal to",
+                      "value": "formula:number-greater_than_or_equal_to"
+                    },
+                    {
+                      "label": "Number - Less than or equal to",
+                      "value": "formula:number-less_than_or_equal_to"
+                    },
+                    {
+                      "label": "Number - Is empty (Boolean)",
+                      "value": "formula:number-is_empty"
+                    },
+                    {
+                      "label": "Number - Is not empty (boolean)",
+                      "value": "formula:number-is_not_empty"
+                    },
+                    {
+                      "label": "Date - Equals",
+                      "value": "formula:date-equals"
+                    },
+                    {
+                      "label": "Date - before",
+                      "value": "formula:date-before"
+                    },
+                    {
+                      "label": "Date - after",
+                      "value": "formula:date-after"
+                    },
+                    {
+                      "label": "Date - On or before",
+                      "value": "formula:date-on_or_before"
+                    },
+                    {
+                      "label": "Date - On or after",
+                      "value": "formula:date-on_or_after"
+                    },
+                    {
+                      "label": "Date - Is empty (Boolean)",
+                      "value": "formula:date-is_empty"
+                    },
+                    {
+                      "label": "Date - Is not empty (boolean)",
+                      "value": "formula:date-is_not_empty"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "sorts",
+            "spec": [
+              {
+                "name": "select",
+                "type": "select",
+                "label": "Select a Field to Sort",
+                "options": [
+                  {
+                    "label": "Property Field",
+                    "value": "property",
+                    "nested": [
+                      {
+                        "name": "property",
+                        "type": "select",
+                        "label": "Property Field",
+                        "options": "rpc://notion/1/listDatabasePropertiesFieldsForFilter?sortParameter=true",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Timestamp",
+                    "value": "timestamp",
+                    "nested": [
+                      {
+                        "name": "timestamp",
+                        "type": "select",
+                        "label": "Timestamp",
+                        "options": [
+                          {
+                            "label": "Created time",
+                            "value": "created_time",
+                            "default": true
+                          },
+                          {
+                            "label": "Last edited time",
+                            "value": "last_edited_time"
+                          }
+                        ],
+                        "required": true
+                      }
+                    ],
+                    "default": true
+                  }
+                ],
+                "required": true
+              },
+              {
+                "name": "direction",
+                "type": "select",
+                "label": "Direction",
+                "options": [
+                  {
+                    "label": "Ascending",
+                    "value": "ascending"
+                  },
+                  {
+                    "label": "Descending",
+                    "value": "descending"
+                  }
+                ],
+                "required": true
+              }
+            ],
+            "type": "array",
+            "label": "Sorts"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "sorts": {
+              "mode": "chose"
+            },
+            "select": {
+              "label": "Data Source ItemsThis must be used if your database has multiple data sources."
+            },
+            "data_source": {
+              "rpcSearch": {
+                "label": "CLIENT DATABASE ",
+                "value": "{{NOTION_DB_SEARCH_ID}}"
+              }
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "notion3"
+              },
+              "label": "lecot.gabriel@gmail.com"
+            }
+          }
+        },
+        "designer": {
+          "x": 1200,
+          "y": 8
+        },
+        "interface": [
+          {
+            "name": "__IMTLENGTH__",
+            "type": "uinteger",
+            "label": "Total number of bundles"
+          },
+          {
+            "name": "__IMTINDEX__",
+            "type": "uinteger",
+            "label": "Bundle order position"
+          },
+          {
+            "name": "object",
+            "type": "text",
+            "label": "Object"
+          },
+          {
+            "name": "id",
+            "type": "text",
+            "label": "Page ID"
+          },
+          {
+            "name": "created_time",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "last_edited_time",
+            "type": "date",
+            "label": "Last Edited Time"
+          },
+          {
+            "name": "created_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Created by"
+          },
+          {
+            "name": "last_edited_by",
+            "spec": [
+              {
+                "name": "object",
+                "type": "text",
+                "label": "Object"
+              },
+              {
+                "name": "id",
+                "type": "uuid",
+                "label": "ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Last Edited by"
+          },
+          {
+            "name": "icon",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "emoji",
+                "type": "text",
+                "label": "Emoji"
+              }
+            ],
+            "type": "collection",
+            "label": "Icon"
+          },
+          {
+            "name": "cover",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "external",
+                "spec": [
+                  {
+                    "name": "url",
+                    "type": "text",
+                    "label": "URL"
+                  }
+                ],
+                "type": "collection",
+                "label": "External"
+              }
+            ],
+            "type": "collection",
+            "label": "Cover"
+          },
+          {
+            "name": "url",
+            "type": "text",
+            "label": "URL"
+          },
+          {
+            "name": "parent",
+            "spec": [
+              {
+                "name": "type",
+                "type": "text",
+                "label": "Type"
+              },
+              {
+                "name": "workspace",
+                "type": "boolean",
+                "label": "Workspace"
+              },
+              {
+                "name": "page_id",
+                "type": "text",
+                "label": "Page ID"
+              },
+              {
+                "name": "database_id",
+                "type": "text",
+                "label": "Database ID"
+              },
+              {
+                "name": "data_source_id",
+                "type": "text",
+                "label": "Data Source ID"
+              }
+            ],
+            "type": "collection",
+            "label": "Parent"
+          },
+          {
+            "name": "properties",
+            "spec": {
+              "spec": [
+                {
+                  "name": "id",
+                  "type": "text",
+                  "label": "ID"
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "label": "Type"
+                },
+                {
+                  "name": "people",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                      },
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "avatar_url",
+                        "type": "text",
+                        "label": "Avatar Url"
+                      },
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "person",
+                        "spec": [
+                          {
+                            "name": "email",
+                            "type": "text",
+                            "label": "Email"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Person"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "People"
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "label": "URL"
+                },
+                {
+                  "name": "text",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Text"
+                },
+                {
+                  "name": "select",
+                  "spec": [
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "color",
+                      "type": "text",
+                      "label": "Color"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Select"
+                },
+                {
+                  "name": "email",
+                  "type": "text",
+                  "label": "Email"
+                },
+                {
+                  "name": "phone_number",
+                  "type": "text",
+                  "label": "Phone Number"
+                },
+                {
+                  "name": "multi_select",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      },
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Multi Select"
+                },
+                {
+                  "name": "date",
+                  "spec": [
+                    {
+                      "name": "start",
+                      "type": "text",
+                      "label": "Start"
+                    },
+                    {
+                      "name": "end",
+                      "type": "text",
+                      "label": "End"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Date"
+                },
+                {
+                  "name": "checkbox",
+                  "type": "boolean",
+                  "label": "Checkbox"
+                },
+                {
+                  "name": "number",
+                  "type": "number",
+                  "label": "Number"
+                },
+                {
+                  "name": "files",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Files"
+                },
+                {
+                  "name": "title",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                      },
+                      {
+                        "name": "text",
+                        "spec": [
+                          {
+                            "name": "content",
+                            "type": "text",
+                            "label": "Content"
+                          },
+                          {
+                            "name": "link",
+                            "type": "text",
+                            "label": "Link"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Text"
+                      },
+                      {
+                        "name": "annotations",
+                        "spec": [
+                          {
+                            "name": "bold",
+                            "type": "boolean",
+                            "label": "Bold"
+                          },
+                          {
+                            "name": "italic",
+                            "type": "boolean",
+                            "label": "Italic"
+                          },
+                          {
+                            "name": "strikethrough",
+                            "type": "boolean",
+                            "label": "Strikethrough"
+                          },
+                          {
+                            "name": "underline",
+                            "type": "boolean",
+                            "label": "Underline"
+                          },
+                          {
+                            "name": "code",
+                            "type": "boolean",
+                            "label": "Code"
+                          },
+                          {
+                            "name": "color",
+                            "type": "text",
+                            "label": "Color"
+                          }
+                        ],
+                        "type": "collection",
+                        "label": "Annotations"
+                      },
+                      {
+                        "name": "plain_text",
+                        "type": "text",
+                        "label": "Plain Text"
+                      },
+                      {
+                        "name": "href",
+                        "type": "text",
+                        "label": "Href"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Title"
+                },
+                {
+                  "name": "last_edited_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Last Edited Time"
+                },
+                {
+                  "name": "created_time",
+                  "time": true,
+                  "type": "date",
+                  "label": "Created Time"
+                },
+                {
+                  "name": "last_edited_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Last Edited By"
+                },
+                {
+                  "name": "created_by",
+                  "spec": [
+                    {
+                      "name": "object",
+                      "type": "text",
+                      "label": "Object"
+                    },
+                    {
+                      "name": "id",
+                      "type": "text",
+                      "label": "ID"
+                    },
+                    {
+                      "name": "name",
+                      "type": "text",
+                      "label": "Name"
+                    },
+                    {
+                      "name": "avatar_url",
+                      "type": "text",
+                      "label": "Avatar Url"
+                    },
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "person",
+                      "spec": [
+                        {
+                          "name": "email",
+                          "type": "text",
+                          "label": "Email"
+                        }
+                      ],
+                      "type": "collection",
+                      "label": "Person"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Created By"
+                },
+                {
+                  "name": "formula",
+                  "spec": [
+                    {
+                      "name": "type",
+                      "type": "text",
+                      "label": "Type"
+                    },
+                    {
+                      "name": "string",
+                      "type": "text",
+                      "label": "String"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Formula"
+                },
+                {
+                  "name": "relation",
+                  "spec": {
+                    "spec": [
+                      {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                      }
+                    ],
+                    "type": "collection"
+                  },
+                  "type": "array",
+                  "label": "Relation"
+                },
+                {
+                  "name": "label",
+                  "type": "text",
+                  "label": "Label"
+                }
+              ],
+              "type": "collection"
+            },
+            "type": "array",
+            "label": "Properties"
+          },
+          {
+            "name": "public_url",
+            "type": "text",
+            "label": "Public URL"
+          },
+          {
+            "name": "archived",
+            "type": "boolean",
+            "label": "Archived"
+          },
+          {
+            "name": "in_trash",
+            "type": "boolean",
+            "label": "In Trash"
+          },
+          {
+            "name": "properties_value",
+            "spec": [
+              {
+                "name": "Trigger Automation Template",
+                "type": "boolean",
+                "label": "Trigger Automation Template"
+              },
+              {
+                "name": "Client Invited",
+                "type": "boolean",
+                "label": "Client Invited"
+              },
+              {
+                "name": "Mail Accès Client",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Mail Accès Client"
+              },
+              {
+                "name": "Cover Image",
+                "spec": [
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "file",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      },
+                      {
+                        "name": "expiry_time",
+                        "type": "date",
+                        "label": "Expiry Time"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "File"
+                  },
+                  {
+                    "name": "external",
+                    "spec": [
+                      {
+                        "name": "url",
+                        "type": "text",
+                        "label": "URL"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "External"
+                  }
+                ],
+                "type": "array",
+                "label": "Cover Image"
+              },
+              {
+                "name": "Client Portal Hub",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  }
+                ],
+                "type": "array",
+                "label": "Client Portal Hub"
+              },
+              {
+                "name": "Nom Société",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Nom Société"
+              },
+              {
+                "name": "Created time",
+                "type": "date",
+                "label": "Created time"
+              },
+              {
+                "name": "Status",
+                "spec": [
+                  {
+                    "name": "id",
+                    "type": "text",
+                    "label": "ID"
+                  },
+                  {
+                    "name": "name",
+                    "type": "text",
+                    "label": "Name"
+                  },
+                  {
+                    "name": "color",
+                    "type": "text",
+                    "label": "Color"
+                  }
+                ],
+                "type": "collection",
+                "label": "Status"
+              },
+              {
+                "name": "email client",
+                "type": "text",
+                "label": "email client"
+              },
+              {
+                "name": "Contrat Signé ",
+                "type": "boolean",
+                "label": "Contrat Signé "
+              },
+              {
+                "name": "Espace Client ",
+                "type": "text",
+                "label": "Espace Client "
+              },
+              {
+                "name": "Name",
+                "spec": [
+                  {
+                    "name": "type",
+                    "type": "text",
+                    "label": "Type"
+                  },
+                  {
+                    "name": "text",
+                    "spec": [
+                      {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                      },
+                      {
+                        "name": "link",
+                        "type": "text",
+                        "label": "Link"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Text"
+                  },
+                  {
+                    "name": "annotations",
+                    "spec": [
+                      {
+                        "name": "bold",
+                        "type": "boolean",
+                        "label": "Bold"
+                      },
+                      {
+                        "name": "italic",
+                        "type": "boolean",
+                        "label": "Italic"
+                      },
+                      {
+                        "name": "strikethrough",
+                        "type": "boolean",
+                        "label": "Strikethrough"
+                      },
+                      {
+                        "name": "underline",
+                        "type": "boolean",
+                        "label": "Underline"
+                      },
+                      {
+                        "name": "code",
+                        "type": "boolean",
+                        "label": "Code"
+                      },
+                      {
+                        "name": "color",
+                        "type": "text",
+                        "label": "Color"
+                      }
+                    ],
+                    "type": "collection",
+                    "label": "Annotations"
+                  },
+                  {
+                    "name": "plain_text",
+                    "type": "text",
+                    "label": "Plain Text"
+                  },
+                  {
+                    "name": "href",
+                    "type": "text",
+                    "label": "Href"
+                  }
+                ],
+                "type": "array",
+                "label": "Name"
+              }
+            ],
+            "type": "collection",
+            "label": "Properties Value"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:notion2,notion3",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_NOTION}}"
+      }
+    },
+    {
+      "id": 9,
+      "filter": null,
+      "mapper": {
+        "duration": "60"
+      },
+      "module": "util:FunctionSleep",
+      "version": 1,
+      "metadata": {
+        "expect": [
+          {
+            "name": "duration",
+            "type": "uinteger",
+            "label": "Delay",
+            "required": true,
+            "validate": {
+              "max": 300,
+              "min": 1
+            }
+          }
+        ],
+        "restore": {},
+        "designer": {
+          "x": 1500,
+          "y": 0
+        }
+      },
+      "parameters": {}
+    },
+    {
+      "id": 15,
+      "mapper": {
+        "to": [
+          "{{5.client_email}}"
+        ],
+        "subject": "Ton Espace Client ",
+        "bodyType": "collection",
+        "contents": [
+          {
+            "text": "Bonjour, tu trouveras ici ton espace Client Personnalisé. \n\nClique sur le lien et connecte toi à Notion pour l'ouvrir. \n\nAccès : {{4.url}}",
+            "image": {}
+          }
+        ]
+      },
+      "module": "google-email:sendAnEmail",
+      "version": 4,
+      "metadata": {
+        "expect": [
+          {
+            "name": "to",
+            "spec": {
+              "name": "value",
+              "type": "email",
+              "label": "Recipient email address",
+              "required": true,
+              "validate": true
+            },
+            "type": "array",
+            "label": "To",
+            "required": true
+          },
+          {
+            "name": "subject",
+            "type": "text",
+            "label": "Subject"
+          },
+          {
+            "name": "bodyType",
+            "type": "select",
+            "label": "Body type",
+            "required": true,
+            "validate": {
+              "enum": [
+                "rawHtml",
+                "collection"
+              ]
+            }
+          },
+          {
+            "name": "attachments",
+            "spec": {
+              "name": "value",
+              "spec": [
+                {
+                  "name": "filename",
+                  "type": "filename",
+                  "label": "File name",
+                  "required": true,
+                  "semantic": "file:name"
+                },
+                {
+                  "name": "data",
+                  "type": "buffer",
+                  "label": "Data",
+                  "required": true,
+                  "semantic": "file:data"
+                }
+              ],
+              "type": "collection",
+              "label": "Attachment"
+            },
+            "type": "array",
+            "label": "Attachments"
+          },
+          {
+            "name": "from",
+            "type": "select",
+            "label": "From"
+          },
+          {
+            "name": "cc",
+            "spec": {
+              "name": "value",
+              "type": "email",
+              "label": "Recipient email address"
+            },
+            "type": "array",
+            "label": "CC recipients"
+          },
+          {
+            "name": "bcc",
+            "spec": {
+              "name": "value",
+              "type": "email",
+              "label": "Recipient email address"
+            },
+            "type": "array",
+            "label": "BCC recipients"
+          },
+          {
+            "name": "emailHeaders",
+            "spec": {
+              "name": "value",
+              "spec": [
+                {
+                  "name": "key",
+                  "type": "text",
+                  "label": "Key",
+                  "required": true
+                },
+                {
+                  "name": "value",
+                  "type": "text",
+                  "label": "Value"
+                }
+              ],
+              "type": "collection",
+              "label": "Email header"
+            },
+            "type": "array",
+            "label": "Additional email headers"
+          },
+          {
+            "name": "contents",
+            "spec": {
+              "name": "value",
+              "spec": [
+                {
+                  "name": "text",
+                  "type": "text",
+                  "label": "Text"
+                },
+                {
+                  "name": "image",
+                  "spec": [
+                    {
+                      "name": "filename",
+                      "type": "filename",
+                      "label": "File name",
+                      "semantic": "file:name"
+                    },
+                    {
+                      "name": "data",
+                      "type": "buffer",
+                      "label": "Data",
+                      "semantic": "file:data"
+                    },
+                    {
+                      "name": "width",
+                      "type": "uinteger",
+                      "label": "Width"
+                    },
+                    {
+                      "name": "height",
+                      "type": "uinteger",
+                      "label": "Height"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Image"
+                }
+              ],
+              "type": "collection",
+              "label": "Content"
+            },
+            "type": "array",
+            "label": "Body contents"
+          },
+          {
+            "name": "signature",
+            "type": "select",
+            "label": "Signature content"
+          }
+        ],
+        "restore": {
+          "expect": {
+            "cc": {
+              "mode": "chose"
+            },
+            "to": {
+              "mode": "chose",
+              "items": [
+                null
+              ]
+            },
+            "bcc": {
+              "mode": "chose"
+            },
+            "from": {
+              "mode": "chose"
+            },
+            "bodyType": {
+              "label": "Collection of contents (text, images, etc.)"
+            },
+            "contents": {
+              "mode": "chose",
+              "items": [
+                null
+              ]
+            },
+            "signature": {
+              "mode": "chose"
+            },
+            "attachments": {
+              "mode": "chose"
+            },
+            "emailHeaders": {
+              "mode": "chose"
+            }
+          },
+          "parameters": {
+            "__IMTCONN__": {
+              "data": {
+                "scoped": "true",
+                "connection": "google-email"
+              },
+              "label": "My Gmail connection (lecot.gabriel@gmail.com)"
+            }
+          }
+        },
+        "designer": {
+          "x": 1885,
+          "y": 6
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:google-email",
+            "label": "Connection",
+            "required": true
+          }
+        ]
+      },
+      "parameters": {
+        "__IMTCONN__": "{{CONNECTION_GMAIL}}"
+      }
+    }
+  ],
+  "name": "A2 : DOCUSIGN + ACCES NOTION",
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "designer": {
+      "orphans": [],
+      "samples": {
+        "2": {
+          "uri": "/restapi/v2.1/accounts/{{DOCUSIGN_ACCOUNT_ID}}/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89...",
+          "data": {
+            "userId": "5b172bd4-d0ce-4ed9-a117-28ce9968e2fb",
+            "accountId": "{{DOCUSIGN_ACCOUNT_ID}}",
+            "envelopeId": "5a71d7e0-f385-4e07-ae9f-e01c89acc459",
+            "recipientId": "1"
+          },
+          "event": "recipient-completed",
+          "apiVersion": "v2.1",
+          "retryCount": 0,
+          "configurationId": 21748081,
+          "generatedDateTime": "2026-03-30T11:17:44.6559851Z"
+        },
+        "4": {
+          "id": "33345ca2-a462-8173-a9a5-ee96c29bd368",
+          "url": "https://www.notion.so/Espace-Client-Lucas-Etoubleau-33345ca2a4628173a9a5ee96c29bd368",
+          "icon": {
+            "icon": {
+              "name": "triangle",
+              "color": "orange"
+            },
+            "type": "icon"
+          },
+          "cover": null,
+          "object": "page",
+          "parent": {
+            "type": "data_source_id",
+            "database_id": "2d145ca2-a462-8184-9430-d9de2452f4e1",
+            "data_source_id": "{{NOTION_DB_SEARCH_ID}}"
+          },
+          "archived": false,
+          "in_trash": false,
+          "is_locked": false,
+          "created_by": {
+            "id": "00000000-0000-0000-0000-000000000003",
+            "object": "user"
+          },
+          "properties": [
+            {
+              "id": "title",
+              "url": null,
+              "type": "title",
+              "email": "lucasetoubleau.genesis@gmail.com ",
+              "files": [],
+              "label": "Name",
+              "title": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": "Espace Client -  Lucas Etoubleau "
+                  },
+                  "type": "text",
+                  "plain_text": "Espace Client -  Lucas Etoubleau ",
+                  "annotations": {
+                    "bold": false,
+                    "code": false,
+                    "color": "default",
+                    "italic": false,
+                    "underline": false,
+                    "strikethrough": false
+                  }
+                }
+              ],
+              "select": null,
+              "status": {
+                "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+                "name": "Not started",
+                "color": "default"
+              },
+              "checkbox": null,
+              "has_more": null,
+              "relation": [
+                {
+                  "id": "33345ca2-a462-816f-b371-c24c6c4a336a"
+                }
+              ],
+              "rich_text": [
+                {
+                  "href": null,
+                  "text": {
+                    "link": null,
+                    "content": " "
+                  },
+                  "type": "text",
+                  "plain_text": " ",
+                  "annotations": {
+                    "bold": null,
+                    "code": null,
+                    "color": "default",
+                    "italic": null,
+                    "underline": null,
+                    "strikethrough": null
+                  }
+                }
+              ],
+              "created_time": {}
+            }
+          ],
+          "public_url": "https://holistic-maxilla-d6b.notion.site/Espace-Client-Lucas-Etoubleau-33345ca2a4628173a9a5ee96c29bd...",
+          "is_archived": false,
+          "__IMTINDEX__": 1,
+          "created_time": "2026-03-30T11:14:00.000Z",
+          "__IMTLENGTH__": 1,
+          "last_edited_by": {
+            "id": "00000000-0000-0000-0000-000000000003",
+            "object": "user"
+          },
+          "last_edited_time": "2026-03-30T11:14:00.000Z",
+          "properties_value": {
+            "Name": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": "Espace Client -  Lucas Etoubleau "
+                },
+                "type": "text",
+                "plain_text": "Espace Client -  Lucas Etoubleau ",
+                "annotations": {
+                  "bold": false,
+                  "code": false,
+                  "color": "default",
+                  "italic": false,
+                  "underline": false,
+                  "strikethrough": false
+                }
+              }
+            ],
+            "Status": {
+              "id": "ec058303-4b5a-4d2b-a1f1-6af540e5346f",
+              "name": "Not started",
+              "color": "default"
+            },
+            "Projets ": [],
+            "Cover Image": [],
+            "Created time": "2026-03-30T11:14:00.000Z",
+            "email client": "lucasetoubleau.genesis@gmail.com ",
+            "Lien Contrat ": null,
+            "Nom Société": [
+              {
+                "href": null,
+                "text": {
+                  "link": null,
+                  "content": " "
+                },
+                "type": "text",
+                "plain_text": " ",
+                "annotations": {
+                  "bold": null,
+                  "code": null,
+                  "color": "default",
+                  "italic": null,
+                  "underline": null,
+                  "strikethrough": null
+                }
+              }
+            ],
+            "Client Invited": false,
+            "Espace Client ": null,
+            "Contrat Signé ": false,
+            "Client Portal Hub": [
+              {
+                "id": "33345ca2-a462-816f-b371-c24c6c4a336a"
+              }
+            ],
+            "Mail Accès Client": null,
+            "Trigger Automation Template": false
+          }
+        },
+        "5": {
+          "client_email": "lucasetoubleau.genesis@gmail.com"
+        },
+        "14": {
+          "sender": {
+            "email": "lecot.gabriel@gmail.com",
+            "userId": "5b172bd4-d0ce-4ed9-a117-28ce9968e2fb",
+            "userName": "Gabriel Lecot",
+            "accountId": "{{DOCUSIGN_ACCOUNT_ID}}",
+            "ipAddress": "52.50.32.186"
+          },
+          "status": "completed",
+          "uSigState": "esign",
+          "emailBlurb": "Bonjour Lucas, veuillez signer votre contrat de prestation Closium OS via le lien ci-dessous.",
+          "envelopeId": "5a71d7e0-f385-4e07-ae9f-e01c89acc459",
+          "purgeState": "unpurged",
+          "recipients": {
+            "seals": [],
+            "agents": [],
+            "editors": [],
+            "signers": [
+              {
+                "name": "Lucas Etoubleau",
+                "email": "lucasetoubleau.genesis@gmail.com",
+                "status": "completed",
+                "userId": "0976d2ab-1fc8-46fd-99ec-1c60c25579e9",
+                "recipientId": "1",
+                "routingOrder": "1",
+                "sentDateTime": "2026-03-30T11:14:31.380Z",
+                "recipientType": "signer",
+                "completedCount": "1",
+                "creationReason": "sender",
+                "deliveryMethod": "email",
+                "signedDateTime": "2026-03-30T11:17:44.500Z",
+                "isBulkRecipient": "false",
+                "recipientIdGuid": "92674832-d9c1-471c-b5c2-515db341ff06",
+                "requireIdLookup": "false",
+                "deliveredDateTime": "2026-03-30T11:16:55.467Z",
+                "recipientSuppliesTabs": "true",
+                "requireUploadSignature": "false"
+              }
+            ],
+            "notaries": [],
+            "witnesses": [],
+            "carbonCopies": [],
+            "intermediaries": [],
+            "recipientCount": "1",
+            "inPersonSigners": [],
+            "certifiedDeliveries": [],
+            "currentRoutingOrder": "1"
+          },
+          "allowMarkup": "false",
+          "envelopeUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459",
+          "expireAfter": "120",
+          "hasComments": "false",
+          "documentsUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/documents",
+          "emailSubject": "Copie de [TEMPLATE] Contrat Prestation.pdf",
+          "sentDateTime": "2026-03-30T11:14:31.443Z",
+          "templatesUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/templates",
+          "allowComments": "true",
+          "allowReassign": "true",
+          "enableWetSign": "true",
+          "expireEnabled": "true",
+          "is21CFRPart11": "false",
+          "recipientsUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/recipients",
+          "attachmentsUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/attachments",
+          "autoNavigation": "true",
+          "certificateUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/documents/certificate",
+          "expireDateTime": "2026-07-28T11:14:31.443Z",
+          "createdDateTime": "2026-03-30T11:14:29.927Z",
+          "customFieldsUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/custom_fields",
+          "notificationUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/notification",
+          "signingLocation": "online",
+          "allowViewHistory": "true",
+          "envelopeLocation": "current_site",
+          "envelopeMetadata": {
+            "allowCorrect": "true",
+            "allowAdvancedCorrect": "true",
+            "enableSignWithNotary": "false"
+          },
+          "completedDateTime": "2026-03-30T11:17:44.500Z",
+          "deliveredDateTime": "2026-03-30T11:16:55.700Z",
+          "isDynamicEnvelope": "false",
+          "burnDefaultTabData": "false",
+          "envelopeIdStamping": "true",
+          "hasFormDataChanged": "false",
+          "initialSentDateTime": "2026-03-30T11:14:31.443Z",
+          "documentsCombinedUri": "/envelopes/5a71d7e0-f385-4e07-ae9f-e01c89acc459/documents/combined",
+          "lastModifiedDateTime": "2026-03-30T11:14:29.943Z",
+          "signerCanSignOnMobile": "true",
+          "statusChangedDateTime": "2026-03-30T11:17:44.500Z",
+          "isTicketRelatedEnvelope": "false",
+          "disableResponsiveDocument": "false",
+          "isSignatureProviderEnvelope": "false"
+        },
+        "15": {
+          "id": "19d3e7807e18d0b9",
+          "labelIds": [
+            "UNREAD"
+          ],
+          "threadId": "19d3e7807e18d0b9",
+          "sysFolders": [
+            {
+              "id": "INBOX",
+              "name": "Inbox"
+            }
+          ]
+        }
+      }
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  },
+  "scheduling": {
+    "type": "immediately"
+  },
+  "interface": {
+    "input": [],
+    "output": []
+  }
+}
